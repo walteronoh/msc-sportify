@@ -6,15 +6,27 @@ public class SeatSection {
     private boolean vip;
     private Float seatPrice;
 
-    public String getId() {}
+    public String getId() {
+        return this.id;
+    }
 
-    public String getName() {}
+    public String getName() {
+        return this.name;
+    }
 
-    public String getDescription() {}
+    public String getDescription() {
+        return this.description;
+    }
 
-    public int getCapacity() {}
+    public int getCapacity() {
+        return this.capacity;
+    }
 
-    public boolean isVip() {}
+    public boolean isVip() {
+        return this.vip;
+    }
 
-    public Float getSeatPrice() {}
+    public Float getSeatPrice() {
+        return this.seatPrice;
+    }
 }

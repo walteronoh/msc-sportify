@@ -16,15 +16,19 @@ public class Game {
     }
 
     public Date getDate() {
+        return this.date;
     }
 
     public Venue getVenue() {
+        return this.venue;
     }
 
     public void setOutcome(String outcome) {
+        this.outcome = outcome;
     }
 
     public boolean reserve(SeatSection seatSection, List<String> seats) {
+
     }
 
     public boolean unReserve(SeatSection seatSection, List<String> seats) {

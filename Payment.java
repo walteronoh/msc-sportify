@@ -1,13 +1,34 @@
-import java.util.Date;
+import java.sql.Timestamp;
+// import java.util.concurrent.atomic.AtomicLong;
 
-public class Payment {
+public class Payment extends CreateID implements Timestamped{
     private String id; // system generated
     private Float amount;
-    private Date time;
+    private Timestamp time;
     private PaymentMethod paymentMethod;
     private String receiptNumber; // bill ref number
     private Booking booking;
     private User user;
+    
+//  // Mechanism to get new ids
+//     private static AtomicLong idCounter = new AtomicLong();
+
+//     public static String createID() {
+//     return String.valueOf(idCounter.getAndIncrement());
+//     }
+
+
+    public Payment (User u, Booking b, PaymentMethod m, String r, Float a) {
+        // Timestamp t = new Timestamp(System.currentTimeMillis());
+
+        this.amount = a;
+        this.time = now();
+        this.user = u;
+        this.booking = b;
+        this.paymentMethod = m;
+        this.receiptNumber = r;
+        this.id = Payment.createID();
+    }
 
     public String getId() {
         return this.id;
@@ -21,7 +42,7 @@ public class Payment {
         return this.booking;
     }
 
-    public Date getTime() {
+    public Timestamp getTime() {
         return this.time;
     }
 
