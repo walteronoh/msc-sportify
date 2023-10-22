@@ -4,15 +4,15 @@ import java.util.Optional;
 
 public class Venue {
     private String location;
-    private List<SeatSection> seatSections;
+    private List<VenueSection> seatSections;
     private String description;
 
     public Venue (String loc, String desc) {
         this.location = loc;
         this.description = desc;
-        this.seatSections = new LinkedList<SeatSection>();
+        this.seatSections = new LinkedList<VenueSection>();
     }
-    public Venue (String loc, String desc, List<SeatSection> sections) {
+    public Venue (String loc, String desc, List<VenueSection> sections) {
         this.location = loc;
         this.description = desc;
         this.seatSections = sections;
@@ -32,18 +32,18 @@ public class Venue {
         this.description = desc;
     }
 
-    public List<SeatSection> getSeatSections() {
+    public List<VenueSection> getSeatSections() {
         return this.seatSections;
     }
 
-    public Optional <SeatSection> getSeatSection(String id) {
+    public Optional <VenueSection> getSeatSection(String id) {
         return this.seatSections
                          .stream()
                          .filter((s -> s.getId() == id))
                          .findFirst();
     }
 
-    public boolean addSeatSection (SeatSection sec) {
+    public boolean addSeatSection (VenueSection sec) {
         return this.seatSections.add(sec);
     } 
 }

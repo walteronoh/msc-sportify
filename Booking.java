@@ -2,8 +2,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.management.Notification;
-
 public class Booking extends CreateID implements Timestamped{
     private String id;
     private User user;
@@ -11,7 +9,7 @@ public class Booking extends CreateID implements Timestamped{
     private Date bookingDate;
     private boolean attended;
     private boolean cancelled;
-    private List<String> seats;
+    private List<Reservation> reservations;
     private List<Notification> notices;
     private boolean paidInFull;
     private List<Payment> payments;
@@ -19,21 +17,25 @@ public class Booking extends CreateID implements Timestamped{
 
     public Booking (User u,
                     Game g,
-                    List<String> s) {
+                    List<Reservation> r) {
         this.id = createID();
         this.user = u;
         this.game = g;
-        this.seats = s;
+        this.reservations = r;
         this.bookingDate = today();
         this.notices = new LinkedList<Notification>();
-        this.seats = new LinkedList<String>();
         this.payments = new LinkedList<Payment>();
         this.viewedNotices = new LinkedList<Notification>();
         this.attended = false;
         this.cancelled = false;        
     }
 
-    public void makeBooking(User user, Game game) { // belongs in User class
+    public void makePayment(Float amount, 
+                            PaymentMethod method,
+                            String receipt ) {
+        var pmt = new Payment(this.user, this, method, 
+                            receipt, amount);
+        this.payments.add(pmt);
     }
 
     public String getID() {
@@ -51,6 +53,9 @@ public class Booking extends CreateID implements Timestamped{
         return this.game;
     }
 
+    public List<Payment> getPayments() {
+        return this.payments;
+    }
     public void attend() {
         this.attended = true;
     } //
