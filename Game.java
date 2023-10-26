@@ -10,6 +10,7 @@ public class Game extends CreateID implements Timestamped{
     private Date date;
     private Seating seating;
     private List<String> participants;
+    private List<Notification> notices;
     private String outcome;
     private Sport sport;
     private boolean played;
@@ -18,6 +19,7 @@ public class Game extends CreateID implements Timestamped{
                  Sport sp,
                  String desc,
                  List <String> particips,
+                 List <Notification> notices_,
                  Seating s
                  ) {
         this.id = createID();
@@ -36,39 +38,26 @@ public class Game extends CreateID implements Timestamped{
                  String desc,
                  Seating s
                  ) {
-        this(t, sp, desc, new ArrayList<String> (), s);
+        this(t, sp, desc, 
+            new ArrayList<String> (), 
+            new ArrayList<Notification>(), s);
     }
     
-    public void setParticipants (List<String> ps) {
-        this.participants = ps;
-    }
-    public void addParticipants (String p) {
-        this.participants.add(p);
-    }
-    public List<String> getParticipants () {
-        return this.participants;
-    }
-
-    public int getCapacity() {
-        return this.seating.getCapacity();
+    public String getID() {
+        return this.id;
     }
 
     public Date getDate() {
         return this.date;
     }
 
-    public Venue getVenue() {
-        return this.seating.getVenue();
-    }
     public String getTitle() {
         return this.title;
-    }
-    public String getID() {
-        return this.id;
     }
     public void setTitle(String t) {
         this.title = t;
     }
+
     public String getDescription() {
         return this.description;
     }
@@ -79,7 +68,6 @@ public class Game extends CreateID implements Timestamped{
     public String getOutcome () {
         return this.outcome;
     }
-
     public void setOutcome(String outcome) {
         this.outcome = outcome;
     }
@@ -91,18 +79,45 @@ public class Game extends CreateID implements Timestamped{
         return this.played;
     }
 
+    public Sport geSport() {
+        return this.sport;
+    }
+    public void detSport(Sport sp) {
+        this.sport = sp;
+    }
+
+    public void setParticipants (List<String> ps) {
+        this.participants = ps;
+    }
+    public void addParticipants (String p) {
+        this.participants.add(p);
+    }
+    public List<String> getParticipants () {
+        return this.participants;
+    }
+
+
+    public void makeNotification(String description, Severity severity) {
+        var note = new Notification(this, description, severity);
+        this.notices.add(note);
+    }
+    
     public void setSeating (Seating s) {
         this.seating = s;
     }
     public Seating getSeating () {
         return this.seating;
     }
-
-    public Sport geSport() {
-        return this.sport;
+    public List<SeatingSection> getSections() {
+        return this.seating.getSeatingSections();
     }
-    public void detSport(Sport sp) {
-        this.sport = sp;
+
+    public Venue getVenue() {
+        return this.seating.getVenue();
+    }
+
+    public int getCapacity() {
+        return this.seating.getCapacity();
     }
 
     public Optional <Float> reserve( Reservation res) {
@@ -111,13 +126,6 @@ public class Game extends CreateID implements Timestamped{
 
     public Optional <Float> unReserve(Reservation res) {
         return this.seating.unReserve(res);
-    }
-
-    public List<SeatingSection> getSections() {
-        return this.seating.getSeatingSections();
-    }
-
-    public void makeNotification(String description, Enum<Severity> severity) {
     }
 }
 
