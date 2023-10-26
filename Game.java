@@ -8,7 +8,7 @@ public class Game extends CreateID implements Timestamped, Notifiable{
     private String description;
     private Date date;
     private Seating seating;
-    private List<String> participants;
+    private List <Participant> participants;
     private List<Notification> notices;
     private String outcome;
     private Sport sport;
@@ -17,7 +17,7 @@ public class Game extends CreateID implements Timestamped, Notifiable{
     public Game (String t,
                  Sport sp,
                  String desc,
-                 List <String> particips,
+                 List <Participant> particips,
                  List <Notification> notices_,
                  Seating s
                  ) {
@@ -39,7 +39,7 @@ public class Game extends CreateID implements Timestamped, Notifiable{
                  Seating s
                  ) {
         this(t, sp, desc, 
-            new ArrayList<String> (), 
+            new ArrayList<Participant> (), 
             new ArrayList<Notification>(), s);
     }
     
@@ -86,13 +86,13 @@ public class Game extends CreateID implements Timestamped, Notifiable{
         this.sport = sp;
     }
 
-    public void setParticipants (List<String> ps) {
+    public void setParticipants (List<Participant> ps) {
         this.participants = ps;
     }
-    public void addParticipants (String p) {
+    public void addParticipants (Participant p) {
         this.participants.add(p);
     }
-    public List<String> getParticipants () {
+    public List<Participant> getParticipants () {
         return this.participants;
     }
 
@@ -129,8 +129,4 @@ public class Game extends CreateID implements Timestamped, Notifiable{
     public boolean cancelReservations(List<Reservation> resvs) {
         return this.seating.cancelReservations(resvs);
     }
-}
-
-enum Sport {
-    FOOTBALL, BASKETBALL, RUGBY, HANDBALL, CHESS, DARTS, TENNIS, BOXING, HOCKEY
 }
