@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 public class Game extends CreateID implements Timestamped{
     private String id;
@@ -101,6 +100,9 @@ public class Game extends CreateID implements Timestamped{
         var note = new Notification(this, description, severity);
         this.notices.add(note);
     }
+    public List<Notification> getNotices () {
+        return this.notices;
+    }
     
     public void setSeating (Seating s) {
         this.seating = s;
@@ -119,13 +121,12 @@ public class Game extends CreateID implements Timestamped{
     public int getCapacity() {
         return this.seating.getCapacity();
     }
-
-    public Optional <Float> reserve( Reservation res) {
-        return this.seating.reserve(res);
+    
+    public boolean makeReservations (List<Reservation> resvs) {
+        return this.seating.makeReservations(resvs);
     }
-
-    public Optional <Float> unReserve(Reservation res) {
-        return this.seating.unReserve(res);
+    public boolean cancelReservations(List<Reservation> resvs) {
+        return this.seating.cancelReservations(resvs);
     }
 }
 

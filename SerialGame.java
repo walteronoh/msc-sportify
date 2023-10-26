@@ -12,12 +12,13 @@ public class SerialGame extends Game {
                         Sport sp,
                         String desc,
                         List <String> particips,
+                        List <Notification> notices_,
                         Seating s,
                         List<Game> prev,
                         List<Game> nxt,
                         int seriesNo
                         ) {
-        super(t, sp, desc, particips, s);
+        super(t, sp, desc, particips, notices_, s);
         this.previous = prev;
         this.upcoming = nxt;
     }
@@ -25,11 +26,13 @@ public class SerialGame extends Game {
     public SerialGame ( String t,
                         Sport sp,
                         String desc,
-                        List <String> particips,
                         Seating s,
-                        int seriesNo
+                        int seriesNo_
                         ) {
-        this(t, sp, desc, particips, s, new ArrayList<Game>(), new ArrayList<Game>(), seriesNo);
+        super(t,sp,desc,s);
+        this.seriesNo = seriesNo_;
+        this.previous = new ArrayList<Game>();
+        this.upcoming = new ArrayList<Game>();
     }
 
     public List<Game> getPrevious() {

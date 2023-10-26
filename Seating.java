@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class Seating {
    private Venue venue;
@@ -30,7 +29,41 @@ public class Seating {
     return cap;
    }
 
-   public Optional <Float> reserve(Reservation res) {
+    public boolean cancelReservations(List<Reservation> resvs) {
+        var cancelledReses =  new ArrayList<Reservation> (); // Successfully cancelled reservations
+        for (Reservation res : resvs) {
+            var result = this.unReserve(res);
+            if (result) {
+                cancelledReses.add(res);
+            } 
+            else {
+                for(Reservation cres : cancelledReses) {
+                    this.reserve(cres);
+                }
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean makeReservations(List<Reservation> resvs) {
+        var madeReses = new ArrayList<Reservation> ();
+        for(Reservation res: resvs) {
+            var success = this.reserve(res);
+            if (success) {
+                    madeReses.add(res);
+            }
+            else {
+                for (Reservation mres: madeReses) {
+                    this.unReserve(mres);
+                }
+                return false;
+            }
+        }
+        return true;
+    }
+
+   public boolean reserve(Reservation res) {
         var booked = new ArrayList<Pair<Integer,Integer>> ();
         
         var sec = res.getSection();
@@ -45,13 +78,13 @@ public class Seating {
                 booked.forEach((q -> {
                     sec.unBook(q.fst(), q.snd());
                 }));
-                return Optional.empty();
+                return false;
             }
         }
-        return Optional.of(res.getCost());
+        return true;
     }
 
-   public Optional <Float> unReserve(Reservation res) {
+   public boolean unReserve(Reservation res) {
         var unBooked = new ArrayList<Pair<Integer,Integer>> ();
         
         var sec = res.getSection();
@@ -65,10 +98,10 @@ public class Seating {
                 unBooked.forEach((q -> {
                     sec.book(q.fst(), q.snd());
                 }));
-                return Optional.empty();
+                return false;
             }
         }
-        return Optional.of(res.getCost());
+        return true;
     }
 }
 
