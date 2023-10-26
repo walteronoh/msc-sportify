@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Game extends CreateID implements Timestamped{
+public class Game extends CreateID implements Timestamped, Notifiable{
     private String id;
     private String title;
     private String description;
@@ -26,7 +26,8 @@ public class Game extends CreateID implements Timestamped{
         this.title = t;
         this.description = desc;
         this.seating = s;
-        this.participants =particips;
+        this.participants = particips;
+        this.notices = notices_;
         this.sport = sp;
         this.outcome = "";
         this.played = false;

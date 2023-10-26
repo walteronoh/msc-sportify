@@ -2,22 +2,22 @@ import java.util.Date;
 
 public class Notification extends CreateID {
     private String id;
-    private Game game;
+    private Notifiable event;
     private String description;
     private Severity severity;
     private Date timestamp;
 
-    public Notification (Game g, 
+    public Notification (Notifiable n, 
                         String desc,
                         Severity severity) {
         this.id = createID();
-        this.game = g;
+        this.event = n;
         this.description = desc;
         this.severity = severity;
     }
 
-    public Game getGame() {
-        return this.game;
+    public Notifiable getEvent() {
+        return this.event;
     }
 
     public String getDescription() {
