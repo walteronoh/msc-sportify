@@ -73,13 +73,12 @@ public class SeatingSection {
         for (List <BookingStatus> l : this.seats) {
             for (BookingStatus s: l) {
                 if (s == BookingStatus.Available) {
-                    available.add(new Pair(row,col));
+                    available.add(new Pair<Integer,Integer>(row,col));
                     col++;
                 }
             };
             row++;
         }
-
         return available;
     }
 }

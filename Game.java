@@ -76,8 +76,19 @@ public class Game extends CreateID implements Timestamped{
         this.description = t;
     }
 
+    public String getOutcome () {
+        return this.outcome;
+    }
+
     public void setOutcome(String outcome) {
         this.outcome = outcome;
+    }
+
+    public void setPlayed(boolean p) {
+        this.played = p;
+    }
+    public boolean getPlayed() {
+        return this.played;
     }
 
     public void setSeating (Seating s) {
@@ -85,6 +96,13 @@ public class Game extends CreateID implements Timestamped{
     }
     public Seating getSeating () {
         return this.seating;
+    }
+
+    public Sport geSport() {
+        return this.sport;
+    }
+    public void detSport(Sport sp) {
+        this.sport = sp;
     }
 
     public Optional <Float> reserve( Reservation res) {
