@@ -1,28 +1,12 @@
 import java.util.List;
 
-public class User extends CreateID{
-    private int id;
-    private String name;
-    private String email;
-    private String password;
+public class User extends GenericUser{
     private List<Booking> bookings;
 
-    public int getId() {
-        return this.id;
-    }
-
-    public void setName(String n) {
-        this.name = n;
-    }
-    public String getName() {
-        return this.name;
-    }
-
-    public void setEmail(String e) {
-        this.email = e;
-    }    
-    public String getEmail() {
-        return this.email;
+    public User(String name_,
+                String email_,
+                String pass_) {
+        super(name_, email_, pass_);
     }
 
     public List<Booking> getBookings() {
