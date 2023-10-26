@@ -1,8 +1,9 @@
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Team extends Participant{
-    private List<Player> players; 
+    private Set<Player> players; 
     private Manager manager;
     private String city;
     private String stadium;
@@ -12,7 +13,7 @@ public class Team extends Participant{
                 Sport sp,
                 List <String> nick,
                 Manager man,
-                List<Player> plyrs,
+                Set<Player> plyrs,
                 String city_,
                 String stadium_
                 ) {
@@ -31,7 +32,7 @@ public class Team extends Participant{
                 ) {
        super(name_, desc, sp);
        this.manager = man;
-       this.players = new ArrayList<Player>();
+       this.players = new HashSet<Player>();
        this.city = city_;
        this.stadium = stadium_;
     }
@@ -57,10 +58,10 @@ public class Team extends Participant{
         this.manager = m;
     }
     
-    public List<Player> getPlayers() {
+    public Set<Player> getPlayers() {
         return this.players;
     }
-    public void setPlayers(List<Player> plyrs) {
+    public void setPlayers(Set<Player> plyrs) {
         this.players = plyrs;
     }
     public void addPlayer(Player p) {
