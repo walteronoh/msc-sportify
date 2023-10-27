@@ -7,6 +7,15 @@ public class User extends CreateID{
     private String password;
     private List<Booking> bookings;
 
+    // Constructor for the User class
+    public User(int id, String name, String email, String password, List<Booking> bookings) {
+        // Initialize the fields of the User class
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.bookings = bookings;
+    }
     public int getId() {
         return this.id;
     }
