@@ -41,6 +41,7 @@ public class VenueSection extends CreateID {
         return this.id;
     }
 
+    // Get Name method
     public String getName() {
         return this.name;
     }
