@@ -14,6 +14,7 @@ public class Player extends Individual{
                 ) {
         super(name_, desc, sp, nick, g, dob);
     }
+    //Constructor initiated
     public Player (String name_,
                    String desc,
                    Sport sp,
