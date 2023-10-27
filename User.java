@@ -1,37 +1,31 @@
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class User extends CreateID{
-    private int id;
-    private String name;
-    private String email;
-    private String password;
+public class User extends GenericUser{
     private List<Booking> bookings;
+    private Set<Taggable> tags;
 
-    // Constructor for the User class
-    public User(int id, String name, String email, String password, List<Booking> bookings) {
-        // Initialize the fields of the User class
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.bookings = bookings;
-    }
-    public int getId() {
-        return this.id;
-    }
 
-    public void setName(String n) {
-        this.name = n;
+    public User(String name_,
+                String email_,
+                String pass_,
+                List<Booking> bookings_,
+                Set<Taggable> tags_
+                ) {
+        super(name_, email_, pass_);
+        this.bookings = bookings_;
+        this.tags = tags_;
     }
-    public String getName() {
-        return this.name;
-    }
-
-    public void setEmail(String e) {
-        this.email = e;
-    }    
-    public String getEmail() {
-        return this.email;
+    public User(String name_,
+                String email_,
+                String pass_
+                ) {
+        this(name_, email_, pass_,
+            new ArrayList<Booking>(),
+            new HashSet<Taggable>()
+            );
     }
 
     public List<Booking> getBookings() {
@@ -40,4 +34,15 @@ public class User extends CreateID{
     public void addBooking(Booking b) { // Investigate if this should fail
         this.getBookings().add(b);
     }
+
+    public Set<Taggable> getTags() {
+        return this.tags;
+    }
+    public void addTag(Taggable t) {
+        this.tags.add(t);
+    }
+    public void setTags(Set<Taggable> tags_) {
+        this.tags = tags_;
+    }
+
 }

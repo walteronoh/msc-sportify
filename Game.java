@@ -2,13 +2,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Game extends CreateID implements Timestamped{
+public class Game extends CreateID implements Timestamped, Notifiable{
     private String id;
     private String title;
     private String description;
     private Date date;
     private Seating seating;
-    private List<String> participants;
+    private List <Participant> participants;
     private List<Notification> notices;
     private String outcome;
     private Sport sport;
@@ -17,7 +17,7 @@ public class Game extends CreateID implements Timestamped{
     public Game (String t,
                  Sport sp,
                  String desc,
-                 List <String> particips,
+                 List <Participant> particips,
                  List <Notification> notices_,
                  Seating s
                  ) {
@@ -26,7 +26,8 @@ public class Game extends CreateID implements Timestamped{
         this.title = t;
         this.description = desc;
         this.seating = s;
-        this.participants =particips;
+        this.participants = particips;
+        this.notices = notices_;
         this.sport = sp;
         this.outcome = "";
         this.played = false;
@@ -38,7 +39,7 @@ public class Game extends CreateID implements Timestamped{
                  Seating s
                  ) {
         this(t, sp, desc, 
-            new ArrayList<String> (), 
+            new ArrayList<Participant> (), 
             new ArrayList<Notification>(), s);
     }
     
@@ -85,13 +86,13 @@ public class Game extends CreateID implements Timestamped{
         this.sport = sp;
     }
 
-    public void setParticipants (List<String> ps) {
+    public void setParticipants (List<Participant> ps) {
         this.participants = ps;
     }
-    public void addParticipants (String p) {
+    public void addParticipants (Participant p) {
         this.participants.add(p);
     }
-    public List<String> getParticipants () {
+    public List<Participant> getParticipants () {
         return this.participants;
     }
 
@@ -128,8 +129,4 @@ public class Game extends CreateID implements Timestamped{
     public boolean cancelReservations(List<Reservation> resvs) {
         return this.seating.cancelReservations(resvs);
     }
-}
-
-enum Sport {
-    FOOTBALL, BASKETBALL, RUGBY, HANDBALL, CHESS, DARTS, TENNIS, BOXING, HOCKEY
 }
