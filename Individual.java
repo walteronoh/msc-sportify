@@ -12,9 +12,10 @@ public abstract class Individual extends Participant{
                 Sport sp,
                 List<String> nick, 
                 Gender g, 
-                LocalDate dob 
+                LocalDate dob,
+                List<Notification> notes_
                 ) {
-        super(name_, desc, sp, nick);
+        super(name_, desc, sp, nick,notes_);
         this.gender = g;
         this.dateOfBirth = dob;
     }
@@ -24,7 +25,9 @@ public abstract class Individual extends Participant{
                    Gender g,
                    LocalDate dob
                    ) {
-        this(name_, desc, sp, new ArrayList<String>(), g, dob);
+        this(name_, desc, sp, 
+        new ArrayList<String>(), g, dob,
+        new ArrayList<Notification>());
     }
 
     public Gender getGender() {
@@ -37,6 +40,9 @@ public abstract class Individual extends Participant{
     public LocalDate getDateOfBirth () {
         return this.dateOfBirth;
     }
+    // public LocalDate getAge() {
+    //     // var age = new LocalDate();
+    // }
     public void setDateOfBirth(LocalDate d) {
         this.dateOfBirth = d;
     }

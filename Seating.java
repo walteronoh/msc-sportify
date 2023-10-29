@@ -29,6 +29,14 @@ public class Seating {
     return cap;
    }
 
+   public int getBookedCapacity () {
+    var cap = 0;
+    for(SeatingSection s: this.sections) {
+        cap += s.getBookedCapacity();
+    }
+    return cap;
+   }
+
     public boolean cancelReservations(List<Reservation> resvs) {
         var cancelledReses =  new ArrayList<Reservation> (); // Successfully cancelled reservations
         for (Reservation res : resvs) {
@@ -70,8 +78,7 @@ public class Seating {
         var seats = res.getSeats();
 
         for (Pair<Integer,Integer> p : seats) {
-            if (sec.checkAvailable(p.fst(), p.snd())) {
-                sec.book(p.fst(), p.snd());
+            if (sec.book(p.fst(), p.snd())) {
                 booked.add(p);
             }
             else {

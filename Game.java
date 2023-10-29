@@ -8,7 +8,7 @@ public class Game extends CreateID implements Timestamped, Notifiable{
     private String description;
     private Date date;
     private Seating seating;
-    private List <Participant> participants;
+    private List <GameParticipant> participants;
     private List<Notification> notices;
     private String outcome;
     private Sport sport;
@@ -17,7 +17,7 @@ public class Game extends CreateID implements Timestamped, Notifiable{
     public Game (String t,
                  Sport sp,
                  String desc,
-                 List <Participant> particips,
+                 List <GameParticipant> particips,
                  List <Notification> notices_,
                  Seating s
                  ) {
@@ -39,7 +39,7 @@ public class Game extends CreateID implements Timestamped, Notifiable{
                  Seating s
                  ) {
         this(t, sp, desc, 
-            new ArrayList<Participant> (), 
+            new ArrayList<GameParticipant> (), 
             new ArrayList<Notification>(), s);
     }
     
@@ -82,25 +82,20 @@ public class Game extends CreateID implements Timestamped, Notifiable{
     public Sport geSport() {
         return this.sport;
     }
-    public void detSport(Sport sp) {
+    public void setSport(Sport sp) {
         this.sport = sp;
     }
 
-    public void setParticipants (List<Participant> ps) {
+    public void setParticipants (List<GameParticipant> ps) {
         this.participants = ps;
     }
-    public void addParticipants (Participant p) {
+    public void addParticipants (GameParticipant p) {
         this.participants.add(p);
     }
-    public List<Participant> getParticipants () {
+    public List<GameParticipant> getParticipants () {
         return this.participants;
     }
 
-
-    public void makeNotification(String description, Severity severity) {
-        var note = new Notification(this, description, severity);
-        this.notices.add(note);
-    }
     public List<Notification> getNotices () {
         return this.notices;
     }

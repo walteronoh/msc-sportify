@@ -1,22 +1,32 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Participant extends CreateID {
+public abstract class Participant extends CreateID implements Notifiable {
     protected String name;
     protected String description;
     protected String id;
     protected Sport sport;
     protected List<String> nickNames;    
+    protected List<Notification> notices;
 
-    public Participant(String name_, String desc, Sport sp, List<String> nick) {
+    public Participant(String name_, 
+                       String desc, 
+                       Sport sp, 
+                       List<String> nick, 
+                       List<Notification> notices_
+                       ) {
         this.id = createID();
         this.name = name_;
         this.description = desc;
         this.sport = sp;
         this.nickNames = nick;
+        this.notices = notices_;
     }
     public Participant(String name_, String desc, Sport sp) {
-        this(name_,desc, sp, new ArrayList<String>());
+        this(name_,desc, sp, 
+        new ArrayList<String>(), 
+        new ArrayList<Notification>()
+        );
     }
 
     public String getID() {
@@ -54,5 +64,9 @@ public abstract class Participant extends CreateID {
     }
     public boolean isNickName (String n) {
         return this.nickNames.contains(n.toLowerCase());
+    }
+
+    public List<Notification> getNotices() {
+        return notices;
     }
 }

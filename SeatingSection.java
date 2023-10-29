@@ -8,11 +8,11 @@ public class SeatingSection {
     private float price;
     private VenueSection section;
 
-    public SeatingSection (VenueSection sec, float p) {
+    public SeatingSection (VenueSection sec, float price) {
         this.section = sec;
         this.capacity = sec.getCapacity();
         this.bookedCapacity = 0;
-        this.price = p;
+        this.price = price;
         List <List<BookingStatus>> rowList = new ArrayList<List<BookingStatus>>();
         this.section.getRows().forEach(i -> 
                         {
@@ -45,8 +45,7 @@ public class SeatingSection {
     }
 
     public boolean book(Integer row, Integer col) {
-       var status = this.seats.get(row).get(col); 
-       if(status == BookingStatus.Reserved) {
+       if(!checkAvailable(row, col)) {
           return false;
        }
        else {
@@ -56,9 +55,14 @@ public class SeatingSection {
        }
     }
     public boolean unBook(Integer row, Integer col) {
-        this.seats.get(row).set(col, BookingStatus.Available);
-        this.bookedCapacity--;
-        return true;
+       if(checkAvailable(row, col)) {
+            return false;
+       }
+       else {
+            this.seats.get(row).set(col, BookingStatus.Available);
+            this.bookedCapacity--;
+            return true;
+       }
     }
 
     public Boolean checkAvailable(Integer row, Integer col) {

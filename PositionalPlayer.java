@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PositionalPlayer extends Player implements Taggable{
+public class PositionalPlayer extends Individual implements Taggable{
     private String position; //Defender, Attacker etc
 
     public PositionalPlayer(String name_,
@@ -11,9 +11,10 @@ public class PositionalPlayer extends Player implements Taggable{
                             List<String> nick,
                             Gender g,
                             LocalDate dob,
-                            String pos
+                            String pos,
+                            List <Notification> notes_
                             ) {
-        super(name_, desc, sp, nick, g, dob);
+        super(name_, desc, sp, nick, g, dob, notes_);
         this.position = pos;
     }
     public PositionalPlayer(String name_,
@@ -23,7 +24,9 @@ public class PositionalPlayer extends Player implements Taggable{
                             LocalDate dob,
                             String pos
                             ) {
-        this(name_, desc, sp, new ArrayList<String> (), g, dob, pos);
+        this(name_, desc, sp, new ArrayList<String> (), 
+            g, dob, pos, 
+            new ArrayList<Notification>());
     }
 
     public String getPosition() {
