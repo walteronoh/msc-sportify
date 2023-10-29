@@ -11,6 +11,7 @@ public class User extends GenericUser{
     private List<Booking> bookings;
     private Set<Taggable> tags;
 
+
     public User(String name_,
                 String email_,
                 String pass_,

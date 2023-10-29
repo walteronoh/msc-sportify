@@ -44,6 +44,7 @@ public class VenueSection {
         return this.id;
     }
 
+    // Get Name method
     public String getName() {
         return this.name;
     }

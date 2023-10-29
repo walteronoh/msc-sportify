@@ -24,5 +24,8 @@ public class Manager extends Individual{
                    LocalDate dob
                    ) {
         super(name_, desc, sp, g, dob);
+    //comment
+        //this.name= name_;
+        //this.sport=sp
     }
 }
