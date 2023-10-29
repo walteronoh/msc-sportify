@@ -1,4 +1,8 @@
+package Notification;
+
 import java.util.List;
+
+import Enum.Severity;
 
 public interface Notifiable {
     default public void makeNotification(String description, Severity severity) {

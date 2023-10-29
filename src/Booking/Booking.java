@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import Notification;
 import Enum.PaymentMethod;
 import Event.Game;
 import Payment.Payment;
 import User.User;
 import Utils.CreateID;
 import Utils.Timestamped;
+import Notification.Notification;
 
 public class Booking  implements Timestamped{
     private String id;

@@ -2,9 +2,9 @@ package Participant;
 import java.util.ArrayList;
 import java.util.List;
 
-import Notifiable;
-import Notification;
 import Enum.Sport;
+import Notification.Notifiable;
+import Notification.Notification;
 import Utils.CreateID;
 
 public abstract class Participant implements Notifiable {

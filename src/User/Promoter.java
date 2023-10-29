@@ -2,10 +2,10 @@ package User;
 import java.util.ArrayList;
 import java.util.List;
 
-import Notifiable;
-import Severity;
+import Enum.Severity;
 import Event.Game;
 import Event.Series;
+import Notification.Notifiable;
 
 public class Promoter extends GenericUser{
    List<Game> games;

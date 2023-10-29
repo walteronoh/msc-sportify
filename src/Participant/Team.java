@@ -3,8 +3,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import Notification;
 import Enum.Sport;
+import Notification.Notification;
 
 public class Team extends Participant implements GameParticipant{
     private Set<PositionalPlayer> players; 

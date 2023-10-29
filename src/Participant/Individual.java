@@ -3,9 +3,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import Notification;
 import Enum.Gender;
 import Enum.Sport;
+import Notification.Notification;
 
 public abstract class Individual extends Participant{
     

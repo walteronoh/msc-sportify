@@ -3,9 +3,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import Notification;
 import Enum.Gender;
 import Enum.Sport;
+import Notification.Notification;
 import Tagging.Taggable;
 
 public class PositionalPlayer extends Individual implements Taggable{

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import Notifiable;
-import Notification;
 import Booking.Reservation;
 import Enum.Sport;
+import Notification.Notifiable;
+import Notification.Notification;
 import Participant.GameParticipant;
 import Utils.CreateID;
 import Utils.Timestamped;

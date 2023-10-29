@@ -3,9 +3,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import Notifiable;
-import Notification;
-import Severity;
+import Enum.Severity;
+import Notification.Notifiable;
+import Notification.Notification;
 import Utils.CreateID;
 
 public class Series implements Notifiable{

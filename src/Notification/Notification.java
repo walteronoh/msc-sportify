@@ -1,5 +1,8 @@
+package Notification;
+
 import java.util.Date;
 
+import Enum.Severity;
 import Utils.CreateID;
 import Utils.Timestamped;
 
@@ -41,6 +44,3 @@ public class Notification implements Timestamped{
     }
 }
 
-enum Severity {
-    URGENT, PROMOTION, INFORMATION
-}

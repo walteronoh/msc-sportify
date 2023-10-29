@@ -2,9 +2,9 @@ package Participant;
 import java.time.LocalDate;
 import java.util.List;
 
-import Notification;
 import Enum.Gender;
 import Enum.Sport;
+import Notification.Notification;
 
 public class SoloPlayer extends Individual implements GameParticipant{
     public SoloPlayer(String name_, 
