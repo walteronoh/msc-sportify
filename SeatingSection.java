@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import User.BookingStatus;
 import Utils.Pair;
 
 public class SeatingSection {

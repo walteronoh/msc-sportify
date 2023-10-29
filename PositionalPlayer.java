@@ -2,6 +2,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import Enum.Gender;
+import Enum.Sport;
+
 public class PositionalPlayer extends Individual implements Taggable{
     private String position; //Defender, Attacker etc
 

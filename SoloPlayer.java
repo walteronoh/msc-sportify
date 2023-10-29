@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.util.List;
 
+import Enum.Gender;
+import Enum.Sport;
+
 public class SoloPlayer extends Individual implements GameParticipant{
     public SoloPlayer(String name_, 
                 String desc,

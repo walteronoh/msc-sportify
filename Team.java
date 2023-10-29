@@ -2,6 +2,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import Enum.Sport;
+
 public class Team extends Participant implements GameParticipant{
     private Set<PositionalPlayer> players; 
     private Manager manager;

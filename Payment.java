@@ -1,10 +1,11 @@
 import java.sql.Timestamp;
 // import java.util.concurrent.atomic.AtomicLong;
 
+import Enum.PaymentMethod;
 import Utils.CreateID;
 import Utils.Timestamped;
 
-public class Payment extends CreateID implements Timestamped{
+public class Payment implements Timestamped{
     private String id; // system generated
     private Float amount;
     private Timestamp time;
@@ -30,7 +31,7 @@ public class Payment extends CreateID implements Timestamped{
         this.booking = b;
         this.paymentMethod = m;
         this.receiptNumber = r;
-        this.id = Payment.createID();
+        this.id = CreateID.createID();
     }
 
     public String getId() {
@@ -62,8 +63,5 @@ public class Payment extends CreateID implements Timestamped{
     }
 }
 
-enum PaymentMethod {
-    MPESA, CHEQUE, DIRECTDEPOSIT, CASH
-}
 
 

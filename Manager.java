@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.util.List;
 
+import Enum.Gender;
+import Enum.Sport;
+
 public class Manager extends Individual{
     public Manager(String name_, 
                 String desc,
