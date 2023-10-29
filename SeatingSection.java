@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import Utils.Pair;
+
 public class SeatingSection {
     private List< List<BookingStatus>> seats;
     private Integer capacity; 

@@ -1,14 +1,16 @@
-public abstract class GenericUser extends CreateID{
+import Utils.CreateID;
+
+public abstract class GenericUser {
     protected String id;
     protected String name;
     protected String email;
     protected String password;
 
-    public GenericUser(String name_, String email_, String pass) {
+    public GenericUser(String name_, String email_, String pass, String prefix) {
         this.name = name_;
         this.email = email_;
         this.password = pass;
-        this.id = createID();
+        this.id = CreateID.createNamedID(prefix);
     }
     
     public boolean checkPass(String pass) {

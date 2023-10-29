@@ -1,5 +1,7 @@
 import java.util.List;
 
+import Utils.Pair;
+
 public class Reservation {
     private SeatingSection section;
     private List <Pair <Integer, Integer> > seats ;

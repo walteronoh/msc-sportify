@@ -2,7 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class Series extends CreateID implements Notifiable{
+import Utils.CreateID;
+
+public class Series implements Notifiable{
     private List<Game> games;
     private List <Notification> notices;
     private String id;
@@ -18,7 +20,7 @@ public class Series extends CreateID implements Notifiable{
                    List<Game> gameList, 
                    List<Notification> notices_
                    ) {
-        this.id = createID();
+        this.id = CreateID.createNamedID("SR");
         this.title = title_;
         this.description = desc;
         this.games = gameList;

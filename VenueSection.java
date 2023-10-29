@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class VenueSection extends CreateID {
+import Utils.CreateID;
+
+public class VenueSection {
     private String id;
     private String name;
     private String description;
@@ -16,7 +18,7 @@ public class VenueSection extends CreateID {
                         Float price,
                         boolean is_vip
                         ) {
-        this.id = createID();
+        this.id = CreateID.createID();
         this.name = n;
         this.description = d;
         this.vip = is_vip;

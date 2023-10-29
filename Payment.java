@@ -1,6 +1,9 @@
 import java.sql.Timestamp;
 // import java.util.concurrent.atomic.AtomicLong;
 
+import Utils.CreateID;
+import Utils.Timestamped;
+
 public class Payment extends CreateID implements Timestamped{
     private String id; // system generated
     private Float amount;

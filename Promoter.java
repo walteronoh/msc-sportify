@@ -6,7 +6,7 @@ public class Promoter extends GenericUser{
    List<Series> series; 
 
    public Promoter(String name_, String email_, String pass) {
-        super(name_, email_, pass);
+        super(name_, email_, pass, "UP");
         this.games = new ArrayList<Game>();
         this.series = new ArrayList<Series>();
    }

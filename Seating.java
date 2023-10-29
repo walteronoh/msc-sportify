@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import Utils.Pair;
+
 public class Seating {
    private Venue venue;
    private List <SeatingSection> sections;

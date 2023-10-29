@@ -1,6 +1,9 @@
 import java.util.Date;
 
-public class Notification extends CreateID {
+import Utils.CreateID;
+import Utils.Timestamped;
+
+public class Notification implements Timestamped{
     private String id;
     private Notifiable event;
     private String description;
@@ -10,10 +13,11 @@ public class Notification extends CreateID {
     public Notification (Notifiable n, 
                         String desc,
                         Severity severity) {
-        this.id = createID();
+        this.id = CreateID.createNamedID("NT");
         this.event = n;
         this.description = desc;
         this.severity = severity;
+        this.timestamp = now();
     }
 
     public Notifiable getEvent() {

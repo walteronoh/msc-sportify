@@ -13,7 +13,7 @@ public class User extends GenericUser{
                 List<Booking> bookings_,
                 Set<Taggable> tags_
                 ) {
-        super(name_, email_, pass_);
+        super(name_, email_, pass_, "UR");
         this.bookings = bookings_;
         this.tags = tags_;
     }

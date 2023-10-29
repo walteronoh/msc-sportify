@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Participant extends CreateID implements Notifiable {
+import Utils.CreateID;
+
+public abstract class Participant implements Notifiable {
     protected String name;
     protected String description;
     protected String id;
@@ -15,7 +17,7 @@ public abstract class Participant extends CreateID implements Notifiable {
                        List<String> nick, 
                        List<Notification> notices_
                        ) {
-        this.id = createID();
+        this.id = CreateID.createNamedID("PAR");
         this.name = name_;
         this.description = desc;
         this.sport = sp;

@@ -3,7 +3,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Booking extends CreateID implements Timestamped{
+import Utils.CreateID;
+import Utils.Timestamped;
+
+public class Booking  implements Timestamped{
     private String id;
     private User user;
     private Game game;
@@ -21,7 +24,7 @@ public class Booking extends CreateID implements Timestamped{
     public Booking (User u,
                     Game g,
                     List<Reservation> r) {
-        this.id = createID();
+        this.id = CreateID.createNamedID("BN");
         this.user = u;
         this.game = g;
         this.reservations = r;
