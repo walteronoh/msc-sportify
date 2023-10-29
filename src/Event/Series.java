@@ -1,7 +1,11 @@
+package Event;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import Notifiable;
+import Notification;
+import Severity;
 import Utils.CreateID;
 
 public class Series implements Notifiable{

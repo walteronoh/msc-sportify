@@ -1,7 +1,9 @@
+package Participant;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import Notification;
 import Enum.Sport;
 
 public class Team extends Participant implements GameParticipant{

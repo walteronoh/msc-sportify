@@ -1,5 +1,11 @@
+package User;
 import java.util.ArrayList;
 import java.util.List;
+
+import Notifiable;
+import Severity;
+import Event.Game;
+import Event.Series;
 
 public class Promoter extends GenericUser{
    List<Game> games;

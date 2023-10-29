@@ -1,10 +1,19 @@
+package Event;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import Notifiable;
+import Notification;
+import Booking.Reservation;
 import Enum.Sport;
+import Participant.GameParticipant;
 import Utils.CreateID;
 import Utils.Timestamped;
+import Venue.Seating;
+import Venue.SeatingSection;
+import Venue.Venue;
 
 public class Game implements Timestamped, Notifiable{
     private String id;

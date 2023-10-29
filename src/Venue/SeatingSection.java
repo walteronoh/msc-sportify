@@ -1,7 +1,8 @@
+package Venue;
 import java.util.ArrayList;
 import java.util.List;
 
-import User.BookingStatus;
+import Enum.BookingStatus;
 import Utils.Pair;
 
 public class SeatingSection {

@@ -1,3 +1,4 @@
+package User;
 import Utils.CreateID;
 
 public abstract class GenericUser {

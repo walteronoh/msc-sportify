@@ -1,6 +1,8 @@
+package Booking;
 import java.util.List;
 
 import Utils.Pair;
+import Venue.SeatingSection;
 
 public class Reservation {
     private SeatingSection section;

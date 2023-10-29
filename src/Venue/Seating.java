@@ -1,6 +1,8 @@
+package Venue;
 import java.util.ArrayList;
 import java.util.List;
 
+import Booking.Reservation;
 import Utils.Pair;
 
 public class Seating {

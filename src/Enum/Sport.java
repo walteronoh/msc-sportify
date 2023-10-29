@@ -1,4 +1,4 @@
-import Taggable;
+import Tagging.Taggable;
 
 package Enum;
 public enum Sport implements Taggable{

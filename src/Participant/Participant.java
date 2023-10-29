@@ -1,6 +1,9 @@
+package Participant;
 import java.util.ArrayList;
 import java.util.List;
 
+import Notifiable;
+import Notification;
 import Enum.Sport;
 import Utils.CreateID;
 

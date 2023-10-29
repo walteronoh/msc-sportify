@@ -1,9 +1,12 @@
+package Participant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import Notification;
 import Enum.Gender;
 import Enum.Sport;
+import Tagging.Taggable;
 
 public class PositionalPlayer extends Individual implements Taggable{
     private String position; //Defender, Attacker etc

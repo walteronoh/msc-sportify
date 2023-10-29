@@ -1,7 +1,9 @@
+package Payment;
 import java.sql.Timestamp;
 // import java.util.concurrent.atomic.AtomicLong;
 
 import Enum.PaymentMethod;
+import User.User;
 import Utils.CreateID;
 import Utils.Timestamped;
 
