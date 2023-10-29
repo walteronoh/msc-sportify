@@ -7,7 +7,7 @@ import Enum.Gender;
 import Enum.Sport;
 import Notification.Notification;
 
-public abstract class Individual extends Participant{
+public abstract class Individual extends Participant {
     
     protected Gender gender;
     protected LocalDate dateOfBirth;

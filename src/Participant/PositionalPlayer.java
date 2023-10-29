@@ -6,9 +6,8 @@ import java.util.List;
 import Enum.Gender;
 import Enum.Sport;
 import Notification.Notification;
-import Tagging.Taggable;
 
-public class PositionalPlayer extends Individual implements Taggable{
+public class PositionalPlayer extends Individual{
     private String position; //Defender, Attacker etc
 
     public PositionalPlayer(String name_,

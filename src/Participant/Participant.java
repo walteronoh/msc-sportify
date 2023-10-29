@@ -5,9 +5,10 @@ import java.util.List;
 import Enum.Sport;
 import Notification.Notifiable;
 import Notification.Notification;
+import Tagging.Taggable;
 import Utils.CreateID;
 
-public abstract class Participant implements Notifiable {
+public abstract class Participant implements Notifiable, Taggable {
     protected String name;
     protected String description;
     protected String id;

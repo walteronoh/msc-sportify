@@ -3,22 +3,34 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-public class Venue {
+import Tagging.Taggable;
+
+public class Venue implements Taggable{
+    private String name;
     private String location;
     private List<VenueSection> seatSections;
     private String description;
 
-    public Venue (String loc, String desc) {
+    public Venue (String name_, String loc, String desc) {
+        this.name = name_;
         this.location = loc;
         this.description = desc;
         this.seatSections = new LinkedList<VenueSection>();
     }
-    public Venue (String loc, String desc, List<VenueSection> sections) {
+    public Venue (String name_, String loc, String desc, List<VenueSection> sections) {
+        this.name = name_;
         this.location = loc;
         this.description = desc;
         this.seatSections = sections;
     }
     
+    public String getName() {
+        return this.name;
+    }
+    public void setName(String name_) {
+        this.name = name_;
+    }
+
     public String getLocation() {
         return this.location;
     }

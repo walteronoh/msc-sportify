@@ -5,4 +5,7 @@ import Tagging.Taggable;
 public enum Sport implements Taggable{
     
     FOOTBALL, BASKETBALL, RUGBY, HANDBALL, CHESS, DARTS, TENNIS, BOXING, HOCKEY, ATHLETICS;
+    public String getName() {
+        return this.toString();
+    }
 }
