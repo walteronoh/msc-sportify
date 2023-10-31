@@ -20,12 +20,12 @@ public class Booking  implements Timestamped{
     private boolean attended;
     private boolean cancelled;
     private List<Reservation> reservations;
+    private List<Notification> viewedNotices;
+    private boolean paidInFull;
+    private List<Payment> payments;
     private boolean madeReservations;
     private float totalBill;
     // private List<Notification> notices; // Added this to the Game class. Discuss Idea of Notifiable Interface.
-    private boolean paidInFull;
-    private List<Payment> payments;
-    private List<Notification> viewedNotices;
 
     public Booking (User u,
                     Game g,

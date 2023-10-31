@@ -7,8 +7,8 @@ import Utils.Pair;
 
 public class SeatingSection {
     private List< List<BookingStatus>> seats;
-    private Integer capacity; 
-    private Integer bookedCapacity;
+    private int capacity; 
+    private int bookedCapacity;
     private float price;
     private VenueSection section;
 

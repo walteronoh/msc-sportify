@@ -83,7 +83,7 @@ public class VenueSection {
         }
         this.capacity = cap;
     }
-    public void addRow(Integer r) {
+    public void addRow(int r) {
         this.rows.add(r);
         this.capacity += r;
     }

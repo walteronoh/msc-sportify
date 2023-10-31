@@ -63,6 +63,9 @@ public class Game implements Timestamped, Notifiable{
     public Date getDate() {
         return this.date;
     }
+    public void setDate(Date d) {
+        this.date = d;
+    }
 
     public String getTitle() {
         return this.title;

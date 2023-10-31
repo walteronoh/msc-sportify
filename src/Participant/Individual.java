@@ -45,10 +45,14 @@ public abstract class Individual extends Participant {
     public LocalDate getDateOfBirth () {
         return this.dateOfBirth;
     }
-    // public LocalDate getAge() {
-    //     // var age = new LocalDate();
-    // }
+
     public void setDateOfBirth(LocalDate d) {
         this.dateOfBirth = d;
+    }
+    
+    public int getAge() {
+        var today = LocalDate.now();
+        var age = this.dateOfBirth.getYear() - today.getYear();
+        return age;
     }
 }
