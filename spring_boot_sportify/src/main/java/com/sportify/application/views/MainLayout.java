@@ -1,6 +1,7 @@
 package com.sportify.application.views;
 
 import com.sportify.application.security.SecurityService;
+import com.sportify.application.views.list.EventListView;
 import com.sportify.application.views.list.ListView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -27,13 +28,16 @@ public class MainLayout extends AppLayout {
         RouterLink routerLink1 = new RouterLink("Dashboard", DashboardView.class);
         routerLink1.setHighlightCondition(HighlightConditions.sameLocation());
 
-        VerticalLayout verticalLayout = new VerticalLayout(routerLink, routerLink1);
+        RouterLink routerLink2 = new RouterLink("Events", EventListView.class);
+        routerLink2.setHighlightCondition(HighlightConditions.sameLocation());
+
+        VerticalLayout verticalLayout = new VerticalLayout(routerLink, routerLink1, routerLink2);
 
         addToDrawer(verticalLayout);
     }
 
     private void createHeader() {
-        H1 logo = new H1("Vaadin Header");
+        H1 logo = new H1("Sportify");
         logo.addClassNames("text-l", "m-m");
 
         Button button = new Button("Log out", event -> securityService.logOut());

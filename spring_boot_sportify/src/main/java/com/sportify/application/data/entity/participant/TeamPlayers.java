@@ -1,4 +1,4 @@
-package com.sportify.application.data.entity.Participant;
+package com.sportify.application.data.entity.participant;
 
 import com.sportify.application.data.entity.AbstractEntity;
 

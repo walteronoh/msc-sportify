@@ -1,10 +1,10 @@
-package com.sportify.application.data.entity.Participant;
+package com.sportify.application.data.entity.participant;
 
 import com.sportify.application.data.entity.AbstractEntity;
 
 import jakarta.persistence.Entity;
 
 @Entity
-public class GameParticipant extends AbstractEntity {
+public class Team extends AbstractEntity{
     
 }

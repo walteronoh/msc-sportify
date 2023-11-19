@@ -1,10 +1,10 @@
-package com.sportify.application.data.entity.Event;
+package com.sportify.application.data.entity.participant;
 
 import com.sportify.application.data.entity.AbstractEntity;
 
 import jakarta.persistence.Entity;
 
 @Entity
-public class Series extends AbstractEntity {
+public class Individual extends AbstractEntity {
     
 }

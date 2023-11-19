@@ -1,4 +1,4 @@
-package com.sportify.application.data.entity.Venue;
+package com.sportify.application.data.entity.venue;
 
 import com.sportify.application.data.entity.AbstractEntity;
 

@@ -1,10 +1,10 @@
-package com.sportify.application.data.entity.Notification;
+package com.sportify.application.data.entity.booking;
 
 import com.sportify.application.data.entity.AbstractEntity;
 
 import jakarta.persistence.Entity;
 
 @Entity
-public class Notice extends AbstractEntity {
+public class Booking extends AbstractEntity {
     
 }
