@@ -1,6 +1,5 @@
 package com.sportify.application.data.entity;
 
-import com.sportify.application.AbstractEntity;
 import jakarta.persistence.Entity;
 
 @Entity

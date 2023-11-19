@@ -1,4 +1,4 @@
-package com.sportify.application;
+package com.sportify.application.data.entity;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

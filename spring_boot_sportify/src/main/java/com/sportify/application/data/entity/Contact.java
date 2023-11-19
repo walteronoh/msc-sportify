@@ -1,6 +1,5 @@
 package com.sportify.application.data.entity;
 
-import com.sportify.application.AbstractEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

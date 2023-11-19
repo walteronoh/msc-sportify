@@ -9,7 +9,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 @Route("login")
-@PageTitle("Login | Vaadin")
+@PageTitle("Login | Sportify")
 public class LoginView extends VerticalLayout implements BeforeEnterListener {
     private final LoginForm loginForm = new LoginForm();
     public LoginView() {
@@ -21,7 +21,7 @@ public class LoginView extends VerticalLayout implements BeforeEnterListener {
         loginForm.setAction("login");
 
         add(
-                new H1("Vaadin"),
+                new H1("Sportify"),
                 loginForm
         );
     }

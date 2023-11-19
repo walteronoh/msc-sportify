@@ -1,6 +1,5 @@
 package com.sportify.application.data.entity;
 
-import com.sportify.application.AbstractEntity;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;

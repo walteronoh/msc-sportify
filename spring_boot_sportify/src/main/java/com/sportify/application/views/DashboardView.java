@@ -13,7 +13,7 @@ import com.vaadin.flow.router.Route;
 import jakarta.annotation.security.PermitAll;
 
 @Route(value = "dashboard", layout = MainLayout.class)
-@PageTitle("Dashboard | Vaadin CRM")
+@PageTitle("Dashboard | Sportify")
 @PermitAll
 public class DashboardView extends VerticalLayout {
     private final CrmService crmService;
