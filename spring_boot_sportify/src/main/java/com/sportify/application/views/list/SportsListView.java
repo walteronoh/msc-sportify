@@ -1,11 +1,8 @@
 package com.sportify.application.views.list;
 
-import com.sportify.application.data.entity.Contact;
 import com.sportify.application.data.entity.event.Sport;
-import com.sportify.application.services.CrmService;
 import com.sportify.application.services.EventsService;
 import com.sportify.application.views.MainLayout;
-import com.sportify.application.views.forms.ContactForm;
 import com.sportify.application.views.forms.SportForm;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;

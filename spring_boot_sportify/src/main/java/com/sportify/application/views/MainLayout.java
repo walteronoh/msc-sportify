@@ -28,7 +28,19 @@ public class MainLayout extends AppLayout {
         RouterLink routerLink2 = new RouterLink("Sports", SportsListView.class);
         routerLink2.setHighlightCondition(HighlightConditions.sameLocation());
 
-        VerticalLayout verticalLayout = new VerticalLayout(routerLink1, routerLink2);
+        RouterLink routerLink3 = new RouterLink("Bookings", SportsListView.class);
+        routerLink3.setHighlightCondition(HighlightConditions.sameLocation());
+
+        RouterLink routerLink4 = new RouterLink("Participants", SportsListView.class);
+        routerLink4.setHighlightCondition(HighlightConditions.sameLocation());
+
+        RouterLink routerLink5 = new RouterLink("Venues", SportsListView.class);
+        routerLink5.setHighlightCondition(HighlightConditions.sameLocation());
+
+         RouterLink routerLink6 = new RouterLink("Notifications", SportsListView.class);
+        routerLink6.setHighlightCondition(HighlightConditions.sameLocation());
+
+        VerticalLayout verticalLayout = new VerticalLayout(routerLink1, routerLink2, routerLink3, routerLink4, routerLink5, routerLink6);
 
         addToDrawer(verticalLayout);
     }
