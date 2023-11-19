@@ -1,4 +1,4 @@
-package com.sportify.application.views.list;
+package com.sportify.application.views.forms;
 
 import com.sportify.application.data.entity.Company;
 import com.sportify.application.data.entity.Contact;

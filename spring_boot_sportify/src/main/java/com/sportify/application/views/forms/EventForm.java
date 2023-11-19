@@ -1,4 +1,4 @@
-package com.sportify.application.views;
+package com.sportify.application.views.forms;
 
 import com.sportify.application.data.entity.event.Game;
 import com.sportify.application.data.entity.event.Sport;
@@ -31,9 +31,6 @@ public class EventForm extends FormLayout {
     MultiFileMemoryBuffer buffer = new MultiFileMemoryBuffer();
     Upload upload = new Upload(buffer);
 
-    // Remember to remove this section
-        Sport sport1 = new Sport();
-
     Button save = new Button("Save");
     Button cancel = new Button("Cancel");
 
@@ -43,10 +40,6 @@ public class EventForm extends FormLayout {
         addClassName("contact-form");
 
         binder.bindInstanceFields(this);
-        // Remember to remove this section
-        sport1.setName("Football");
-        sports.add(sport1);
-
         sport.setItems(sports);
         sport.setItemLabelGenerator(Sport::getName);
 

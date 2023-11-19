@@ -1,11 +1,8 @@
 package com.sportify.application.views.list;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.sportify.application.services.EventsService;
-import com.sportify.application.views.EventForm;
 import com.sportify.application.views.MainLayout;
+import com.sportify.application.views.forms.EventForm;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
@@ -78,7 +75,7 @@ public class EventListView extends VerticalLayout {
 
     private VerticalLayout createEventsList() {
         VerticalLayout gameLayout = new VerticalLayout();
-        for (int i = 0; i < 20; i++) {
+        eventsService.findAllGames().forEach(game -> {
             Image image = new Image(
                     "https://imgs.search.brave.com/8WMDWc_3SyGre_ptm2lfCXorV0XfOvCWgnZ2Yxboy1c/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9z/cG9ydHMtdG9vbHNf/NTM4NzYtMTM4MDc3/LmpwZz9zaXplPTYy/NiZleHQ9anBn",
                     "Game Image");
@@ -86,7 +83,7 @@ public class EventListView extends VerticalLayout {
             image.setWidth("50%");
 
             Div descriptionDiv = new Div();
-            descriptionDiv.setText("Posted By : Description");
+            descriptionDiv.setText("Description" + game.getDescription());
 
             Button joinButton = new Button("Join");
 
@@ -106,7 +103,7 @@ public class EventListView extends VerticalLayout {
 
             gameLayout.add(gameLayout1);
             // add(gameLayout);
-        }
+        });
         return gameLayout;
         // eventsService.findAllGames().forEach(game -> {
         // Image image = new Image(

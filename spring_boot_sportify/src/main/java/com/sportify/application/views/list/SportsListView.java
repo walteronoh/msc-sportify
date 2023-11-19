@@ -1,9 +1,12 @@
 package com.sportify.application.views.list;
 
 import com.sportify.application.data.entity.Contact;
+import com.sportify.application.data.entity.event.Sport;
 import com.sportify.application.services.CrmService;
+import com.sportify.application.services.EventsService;
 import com.sportify.application.views.MainLayout;
 import com.sportify.application.views.forms.ContactForm;
+import com.sportify.application.views.forms.SportForm;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
@@ -15,19 +18,19 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import jakarta.annotation.security.PermitAll;
 
-@PageTitle("Contacts")
-@Route(value = "", layout = MainLayout.class)
+@PageTitle("Sports | Sportify")
+@Route(value = "sports", layout = MainLayout.class)
 @PermitAll
-public class ListView extends VerticalLayout {
+public class SportsListView extends VerticalLayout {
     //we need a grid and a text field
-    Grid<Contact> grid = new Grid<>(Contact.class);
+    Grid<Sport> grid = new Grid<>(Sport.class);
     TextField filterText = new TextField();
 
-    ContactForm contactForm;
+    SportForm sportForm;
 
-    CrmService crmService;
-    public ListView(CrmService crmService) {
-        this.crmService = crmService;
+    EventsService eventsService;
+    public SportsListView(EventsService eventsService) {
+        this.eventsService = eventsService;
         addClassName("list-view");
         setSizeFull();
 
@@ -45,19 +48,19 @@ public class ListView extends VerticalLayout {
     }
 
     private void closeEditor() {
-        contactForm.setContact(null);
-        contactForm.setVisible(false);
+        sportForm.setSport(null);
+        sportForm.setVisible(false);
         removeClassName("editing");
     }
 
     private void updateList() {
-        grid.setItems(crmService.findAllContacts(filterText.getValue()));
+        grid.setItems(eventsService.findSport(filterText.getValue()));
     }
 
     private Component getContent() {
-        HorizontalLayout horizontalLayout = new HorizontalLayout(grid, contactForm);
+        HorizontalLayout horizontalLayout = new HorizontalLayout(grid, sportForm);
         horizontalLayout.setFlexGrow(2, grid);
-        horizontalLayout.setFlexGrow(1, contactForm);
+        horizontalLayout.setFlexGrow(1, sportForm);
 
         horizontalLayout.setClassName("content");
         horizontalLayout.setSizeFull();
@@ -65,69 +68,68 @@ public class ListView extends VerticalLayout {
         return horizontalLayout;
     }
     private void configureForm() {
-        contactForm = new ContactForm(crmService.findAllCompanies(), crmService.findAllStatuses());
-        contactForm.setWidth("25em");
+        sportForm = new SportForm();
+        sportForm.setWidth("25em");
 
 
-        contactForm.addSaveListener(this::saveContact);
-        contactForm.addDeleteListener(this::deleteContact);
-        contactForm.addCloseListener(this::closeContact);
+        sportForm.addSaveListener(this::saveSport);
+        sportForm.addDeleteListener(this::deleteSport);
+        sportForm.addCloseListener(this::closeSport);
     }
 
-    private  void saveContact(ContactForm.SaveEvent event) {
-        crmService.saveContact(event.getContact());
+    private  void saveSport(SportForm.SaveEvent event) {
+        eventsService.saveSport(event.getSport());
         updateList();
         closeEditor();
     }
 
-    private void deleteContact(ContactForm.DeleteEvent event) {
-        crmService.deleteContact(event.getContact());
+    private void deleteSport(SportForm.DeleteEvent event) {
+        eventsService.deleteSport(event.getSport());
         updateList();
         closeEditor();
     }
 
-    private void closeContact(ContactForm.CloseEvent event) {
+    private void closeSport(SportForm.CloseEvent event) {
         closeEditor();
     }
 
     private Component getToolBar() {
-        filterText.setPlaceholder("Filter by name...");
+        filterText.setPlaceholder("Filter by sport name...");
         filterText.setClearButtonVisible(true);
         filterText.setValueChangeMode(ValueChangeMode.LAZY);
         filterText.addValueChangeListener(e -> updateList());
 
-        Button addContactButton = new Button("Add contact");
-        addContactButton.addClickListener(e -> addContact());
+        Button addSportButton = new Button("Add sport");
+        addSportButton.addClickListener(e -> addSport());
 
-        HorizontalLayout toolBar = new HorizontalLayout(filterText, addContactButton);
+        HorizontalLayout toolBar = new HorizontalLayout(filterText, addSportButton);
         toolBar.addClassName("toolBar");
         return toolBar;
     }
 
-    private void addContact() {
+    private void addSport() {
         grid.asSingleSelect().clear();
-        editContact(new Contact());
+        editSport(new Sport());
     }
 
     private void configureGrid() {
         grid.addClassName("contact-grid");
         setSizeFull();
-        grid.setColumns("firstName", "lastName", "email");
-        grid.addColumn(contact -> contact.getCompany().getName()).setHeader("Status");
-        grid.addColumn(contact -> contact.getCompany().getName()).setHeader("Company");
+        grid.setColumns("name");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
-        grid.asSingleSelect().addValueChangeListener(e -> editContact(e.getValue()));
+        grid.asSingleSelect().addValueChangeListener(e -> editSport(e.getValue()));
     }
 
-    private void editContact(Contact contact) {
-        if(contact == null) {
+    private void editSport(Sport sport) {
+        if(sport == null) {
             closeEditor();
         } else {
-            contactForm.setContact(contact);
-            contactForm.setVisible(true);
+            sportForm.setSport(sport);
+            sportForm.setVisible(true);
             addClassName("editing");
         }
     }
 
 }
+

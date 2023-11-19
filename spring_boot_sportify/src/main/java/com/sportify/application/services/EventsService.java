@@ -25,11 +25,23 @@ public class EventsService {
     }
 
     public void saveGame(Game game) {
-        if(game == null) {
+        if (game == null) {
             System.err.println("Game is null.");
             return;
         }
         gameRepository.save(game);
+    }
+
+    public void deleteSport(Sport sport) {
+        sportRepository.delete(sport);
+    }
+
+    public void saveSport(Sport sport) {
+        if (sport == null) {
+            System.err.println("Sport is null.");
+            return;
+        }
+        sportRepository.save(sport);
     }
 
     public List<Game> findAllGames() {
@@ -42,5 +54,13 @@ public class EventsService {
 
     public List<Sport> findAllSports() {
         return sportRepository.findAll();
+    }
+
+    public List<Sport> findSport(String filterText) {
+        if (filterText == null || filterText.isEmpty()) {
+            return sportRepository.findAll();
+        } else {
+            return sportRepository.search(filterText);
+        }
     }
 }

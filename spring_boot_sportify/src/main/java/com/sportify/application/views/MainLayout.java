@@ -2,7 +2,7 @@ package com.sportify.application.views;
 
 import com.sportify.application.security.SecurityService;
 import com.sportify.application.views.list.EventListView;
-import com.sportify.application.views.list.ListView;
+import com.sportify.application.views.list.SportsListView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.Button;
@@ -22,16 +22,13 @@ public class MainLayout extends AppLayout {
     }
 
     private void createDrawer() {
-        RouterLink routerLink = new RouterLink("List", ListView.class);
-        routerLink.setHighlightCondition(HighlightConditions.sameLocation());
-
-        RouterLink routerLink1 = new RouterLink("Dashboard", DashboardView.class);
+        RouterLink routerLink1 = new RouterLink("Events", EventListView.class);
         routerLink1.setHighlightCondition(HighlightConditions.sameLocation());
 
-        RouterLink routerLink2 = new RouterLink("Events", EventListView.class);
+        RouterLink routerLink2 = new RouterLink("Sports", SportsListView.class);
         routerLink2.setHighlightCondition(HighlightConditions.sameLocation());
 
-        VerticalLayout verticalLayout = new VerticalLayout(routerLink, routerLink1, routerLink2);
+        VerticalLayout verticalLayout = new VerticalLayout(routerLink1, routerLink2);
 
         addToDrawer(verticalLayout);
     }
