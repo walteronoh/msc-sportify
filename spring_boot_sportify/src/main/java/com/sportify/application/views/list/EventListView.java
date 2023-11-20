@@ -102,33 +102,8 @@ public class EventListView extends VerticalLayout {
             gameLayout1.setPadding(true);
 
             gameLayout.add(gameLayout1);
-            // add(gameLayout);
         });
         return gameLayout;
-        // eventsService.findAllGames().forEach(game -> {
-        // Image image = new Image(
-        // "https://imgs.search.brave.com/8WMDWc_3SyGre_ptm2lfCXorV0XfOvCWgnZ2Yxboy1c/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9z/cG9ydHMtdG9vbHNf/NTM4NzYtMTM4MDc3/LmpwZz9zaXplPTYy/NiZleHQ9anBn",
-        // "Game Image");
-        // image.setWidth("100px");
-
-        // Div descriptionDiv = new Div();
-        // descriptionDiv.setText("Posted By : " + game.getDescription());
-
-        // Button joinButton = new Button("Join");
-
-        // HorizontalLayout actions = new HorizontalLayout(joinButton);
-
-        // VerticalLayout gameLayout = new VerticalLayout(image, descriptionDiv,
-        // actions);
-
-        // gameLayout.setAlignItems(Alignment.CENTER);
-
-        // gameLayout.setSpacing(true);
-        // gameLayout.getStyle().set("border", "1px solid #ddd");
-        // gameLayout.setPadding(true);
-
-        // add(gameLayout);
-        // });
     }
 
 }
