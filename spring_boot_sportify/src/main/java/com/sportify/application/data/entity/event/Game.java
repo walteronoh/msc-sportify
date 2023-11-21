@@ -7,15 +7,16 @@ import com.sportify.application.data.entity.AbstractEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Game extends AbstractEntity {
-    @NotBlank
+    @NotEmpty
     private String title;
-    @NotBlank
+    @NotEmpty
     private String description;
-    @NotBlank
+    @NotEmpty
     private Date gameDate;
     @NotBlank
     private String outcome;

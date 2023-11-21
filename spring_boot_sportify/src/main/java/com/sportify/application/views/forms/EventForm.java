@@ -48,7 +48,7 @@ public class EventForm extends FormLayout {
                 description,
                 gameDate,
                 sport,
-                upload,
+                // upload,
                 createButtonLayout());
     }
 

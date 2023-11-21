@@ -3,11 +3,11 @@ package com.sportify.application.data.entity.event;
 import com.sportify.application.data.entity.AbstractEntity;
 
 import jakarta.persistence.Entity;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Sport extends AbstractEntity {
-    @NotBlank
+    @NotEmpty
     private String name;
 
     public String getName() {

@@ -1,7 +1,9 @@
 package com.sportify.application.views;
 
 import com.sportify.application.security.SecurityService;
+import com.sportify.application.views.list.BookingListView;
 import com.sportify.application.views.list.EventListView;
+import com.sportify.application.views.list.NotificationListView;
 import com.sportify.application.views.list.ParticipantListView;
 import com.sportify.application.views.list.SportsListView;
 import com.sportify.application.views.list.VenueListView;
@@ -31,7 +33,7 @@ public class MainLayout extends AppLayout {
         RouterLink routerLink2 = new RouterLink("Sports", SportsListView.class);
         routerLink2.setHighlightCondition(HighlightConditions.sameLocation());
 
-        RouterLink routerLink3 = new RouterLink("Bookings", SportsListView.class);
+        RouterLink routerLink3 = new RouterLink("Bookings", BookingListView.class);
         routerLink3.setHighlightCondition(HighlightConditions.sameLocation());
 
         RouterLink routerLink4 = new RouterLink("Participants", ParticipantListView.class);
@@ -40,7 +42,7 @@ public class MainLayout extends AppLayout {
         RouterLink routerLink5 = new RouterLink("Venues", VenueListView.class);
         routerLink5.setHighlightCondition(HighlightConditions.sameLocation());
 
-        RouterLink routerLink6 = new RouterLink("Notifications", SportsListView.class);
+        RouterLink routerLink6 = new RouterLink("Notifications", NotificationListView.class);
         routerLink6.setHighlightCondition(HighlightConditions.sameLocation());
 
         VerticalLayout verticalLayout = new VerticalLayout(routerLink1, routerLink2, routerLink3, routerLink4,

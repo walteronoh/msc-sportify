@@ -3,13 +3,13 @@ package com.sportify.application.data.entity.venue;
 import com.sportify.application.data.entity.AbstractEntity;
 
 import jakarta.persistence.Entity;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Venue extends AbstractEntity {
-    @NotNull
+    @NotEmpty
     private String name;
-    @NotNull
+    @NotEmpty
     private String description;
 
     public String getName() {

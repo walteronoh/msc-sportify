@@ -5,13 +5,14 @@ import com.sportify.application.data.entity.event.Sport;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Participant extends AbstractEntity {
-    @NotNull
+    @NotEmpty
     private String name;
-    @NotNull
+    @NotEmpty
     private String description;
     @NotNull
     @ManyToOne
