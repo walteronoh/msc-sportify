@@ -1,6 +1,6 @@
 package com.sportify.application.data.entity.event;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,9 +29,9 @@ public class Game extends AbstractEntity implements Notifiable {
     private String title = "New Game";
     @NotEmpty
     private String description = "Description";
-    @NotEmpty
-    private Date gameDate;
-    @NotBlank
+    @NotNull
+    private LocalDate gameDate;
+    
     private String outcome = "";
     @NotNull
     @ManyToOne
@@ -47,12 +47,12 @@ public class Game extends AbstractEntity implements Notifiable {
     private final Set <Notice> notices = new HashSet<>();
 
     public Game () {
-        this.gameDate = new Date();
+        this.gameDate = LocalDate.now();
     }
     public Game (String title_,
                  Sport sport_,
                  String desc_,
-                 Date date_
+                 LocalDate date_
                  ) {
         this.title = title_;
         this.sport = sport_;
@@ -76,11 +76,11 @@ public class Game extends AbstractEntity implements Notifiable {
         return this.description;
     }
 
-    public void setGameDate(Date gameDate) {
+    public void setGameDate(LocalDate gameDate) {
         this.gameDate = gameDate;
     }
 
-    public Date getGameDate() {
+    public LocalDate getGameDate() {
         return this.gameDate;
     }
 

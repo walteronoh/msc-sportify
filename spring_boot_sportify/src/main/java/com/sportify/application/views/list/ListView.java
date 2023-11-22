@@ -16,7 +16,7 @@ import com.vaadin.flow.router.Route;
 import jakarta.annotation.security.PermitAll;
 
 @PageTitle("Contacts")
-@Route(value = "", layout = MainLayout.class)
+@Route(value = "contacts", layout = MainLayout.class)
 @PermitAll
 public class ListView extends VerticalLayout {
     //we need a grid and a text field
