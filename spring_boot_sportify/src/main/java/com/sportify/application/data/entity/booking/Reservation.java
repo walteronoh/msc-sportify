@@ -6,5 +6,9 @@ import jakarta.persistence.Entity;
 
 @Entity
 public class Reservation extends AbstractEntity {
+
+    public Float getCost() {
+        return 0f;
+    }
     
 }

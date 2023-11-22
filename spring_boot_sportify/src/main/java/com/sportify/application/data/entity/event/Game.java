@@ -2,8 +2,11 @@ package com.sportify.application.data.entity.event;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Set;
 
 import com.sportify.application.data.entity.AbstractEntity;
+import com.sportify.application.data.entity.booking.Reservation;
+import com.sportify.application.data.entity.notification.Notice;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
@@ -73,5 +76,17 @@ public class Game extends AbstractEntity {
 
     public boolean getPlayed() {
         return this.played;
+    }
+
+    public @NotEmpty Boolean makeReservations(Set<Reservation> r) {
+        return null;
+    }
+
+    public boolean cancelReservations(Set<Reservation> reservations) {
+        return false;
+    }
+
+    public Set<Notice> getNotices() {
+        return null;
     }
 }
