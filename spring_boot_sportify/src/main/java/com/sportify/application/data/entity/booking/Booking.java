@@ -27,9 +27,6 @@ import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Booking extends AbstractEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
     @NotEmpty
     private Boolean attended;
     @ManyToOne
@@ -88,10 +85,6 @@ public class Booking extends AbstractEntity {
             this.madeReservations = this.game.makeReservations(reservations);
         }
         return this.madeReservations;
-    }
-    @Override
-    public Long getId() {
-        return this.id;
     }
     public BUser getUser() {
         return user;
