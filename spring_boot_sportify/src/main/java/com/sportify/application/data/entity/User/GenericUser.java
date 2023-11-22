@@ -3,10 +3,8 @@ package com.sportify.application.data.entity.User;
 import com.sportify.application.data.entity.AbstractEntity;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.NotNull;
 
-@MappedSuperclass
 public abstract class GenericUser extends AbstractEntity {
    protected String name;
    protected String email;
