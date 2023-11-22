@@ -116,7 +116,8 @@ public class ParticipantListView extends VerticalLayout {
     private void configureGrid() {
         grid.addClassName("contact-grid");
         setSizeFull();
-        grid.setColumns("name", "description", "sport");
+        grid.setColumns("name", "description");
+        grid.addColumn(column -> column.getSport().getName()).setHeader("Sports");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
         grid.asSingleSelect().addValueChangeListener(e -> editParticipant(e.getValue()));

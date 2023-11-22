@@ -1,5 +1,6 @@
 package com.sportify.application.data.entity.event;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import com.sportify.application.data.entity.AbstractEntity;
@@ -16,14 +17,14 @@ public class Game extends AbstractEntity {
     private String title;
     @NotEmpty
     private String description;
-    @NotEmpty
-    private Date gameDate;
-    @NotBlank
+    @NotNull
+    private LocalDate gameDate;
+    
     private String outcome;
     @NotNull
     @ManyToOne
     private Sport sport;
-    @NotBlank
+    
     private boolean played;
 
     public void setTitle(String title) {
@@ -42,11 +43,11 @@ public class Game extends AbstractEntity {
         return this.description;
     }
 
-    public void setGameDate(Date gameDate) {
+    public void setGameDate(LocalDate gameDate) {
         this.gameDate = gameDate;
     }
 
-    public Date getGameDate() {
+    public LocalDate getGameDate() {
         return this.gameDate;
     }
 
