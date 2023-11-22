@@ -1,10 +1,16 @@
 package com.sportify.application.data.entity.notification;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import com.sportify.application.data.entity.AbstractEntity;
+import com.sportify.application.data.entity.enums.Severity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotEmpty;
 
 @Entity
@@ -14,9 +20,18 @@ public class Notice extends AbstractEntity {
     @NotEmpty
     private String description;
     @NotEmpty
-    private String severity;
+    @Enumerated(EnumType.STRING)
+    private Severity severity;
     @NotEmpty
-    private Date date;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="`TIME`", updatable = false,insertable = false)
+    private Timestamp timestamp;
+
+    public Notice(Notifiable notifiable, String description2, Severity severity2) {
+        this.sender = notifiable.getClass().descriptorString();
+        this.description = description2;
+        this.severity = severity2;
+    }
 
     public void setSender(String sender) {
         this.sender = sender;
@@ -34,19 +49,17 @@ public class Notice extends AbstractEntity {
         return this.description;
     }
 
-    public void setSeverity(String severity) {
+    public void setSeverity(Severity severity) {
         this.severity = severity;
     }
-
-    public String getSeverity() {
+    public Severity getSeverity() {
         return this.severity;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
-
-    public Date getDate() {
-        return this.date;
+    public Timestamp getTimestamp() {
+        return timestamp;
     }
 }
