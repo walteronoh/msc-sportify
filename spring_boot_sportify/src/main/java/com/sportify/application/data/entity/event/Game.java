@@ -7,6 +7,7 @@ import java.util.Set;
 import com.sportify.application.data.entity.AbstractEntity;
 import com.sportify.application.data.entity.SeatingSection;
 import com.sportify.application.data.entity.booking.Reservation;
+import com.sportify.application.data.entity.enums.Severity;
 import com.sportify.application.data.entity.notification.Notice;
 import com.sportify.application.data.entity.notification.Notifiable;
 import com.sportify.application.data.entity.participant.Participant;
@@ -141,5 +142,12 @@ public class Game extends AbstractEntity implements Notifiable {
     }
     public int getCapacity() {
         return this.seating.getCapacity();
+    }
+    @Override
+    public void makeNotification(String description, Severity severity) {
+        this.notices.add(new Notice(this, description, severity));
+    }
+    public void addNotice(Notice notice) {
+        this.notices.add(notice);
     }
 }

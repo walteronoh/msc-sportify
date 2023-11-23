@@ -5,9 +5,11 @@ import java.util.Set;
 import com.sportify.application.data.entity.enums.Severity;
 
 public interface Notifiable {
-    default public void makeNotification(String description, Severity severity) {
-        var note = new Notice(this, description, severity);
-        this.getNotices().add(note);
-    }
+    // default public void makeNotification(String description, Severity severity) {
+    //     var note = new Notice(this, description, severity);
+    //     this.getNotices().add(note);
+    // }
+    public void makeNotification(String description, Severity severity);
     public Set<Notice> getNotices();
+    public void addNotice(Notice notice);
 }
