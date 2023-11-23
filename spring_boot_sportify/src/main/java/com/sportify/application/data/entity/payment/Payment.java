@@ -28,10 +28,8 @@ public class Payment extends AbstractEntity {
     @Column(updatable = false)
     private String receiptNumber;
     @ManyToOne
-    @Column(updatable = false)
     private Booking booking;
     @ManyToOne
-    @Column(updatable = false)
     private BUser user;
 
     public Payment () {}
