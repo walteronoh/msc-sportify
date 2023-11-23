@@ -12,8 +12,10 @@ import com.sportify.application.data.utilities.Pair;
 import com.vladmihalcea.hibernate.type.array.EnumArrayType;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
 
+@Entity
 public class SeatingSection extends AbstractEntity {
 
     @Type(value = EnumArrayType.class,
