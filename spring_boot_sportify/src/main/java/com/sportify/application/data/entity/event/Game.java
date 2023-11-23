@@ -30,11 +30,10 @@ public class Game extends AbstractEntity implements Notifiable {
     private String title = "New Game";
     @NotEmpty
     private String description = "Description";
-    @NotNull
-    private LocalDate gameDate;
-    
+    @NotBlank
     private String outcome = "";
     @NotNull
+    private LocalDate gameDate;
     @ManyToOne
     private Sport sport;
     @NotBlank
