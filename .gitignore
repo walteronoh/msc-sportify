@@ -84,3 +84,6 @@ nb-configuration.xml
 ## OS X
 ##############################
 .DS_Store
+spring_boot_sportify/db/
+*.db
+db/
