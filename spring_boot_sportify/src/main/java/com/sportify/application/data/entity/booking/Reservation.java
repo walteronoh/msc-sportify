@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sportify.application.data.entity.AbstractEntity;
-import com.sportify.application.data.entity.SeatingSection;
 import com.sportify.application.data.entity.converters.ListPairConverter;
+import com.sportify.application.data.entity.venue.SeatingSection;
 import com.sportify.application.data.utilities.Pair;
 
 import jakarta.persistence.Column;

@@ -5,13 +5,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.sportify.application.data.entity.AbstractEntity;
-import com.sportify.application.data.entity.SeatingSection;
 import com.sportify.application.data.entity.booking.Reservation;
 import com.sportify.application.data.entity.enums.Severity;
 import com.sportify.application.data.entity.notification.Notice;
 import com.sportify.application.data.entity.notification.Notifiable;
 import com.sportify.application.data.entity.participant.Participant;
 import com.sportify.application.data.entity.venue.Seating;
+import com.sportify.application.data.entity.venue.SeatingSection;
 import com.sportify.application.data.entity.venue.Venue;
 
 import jakarta.persistence.CollectionTable;
