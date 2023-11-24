@@ -56,6 +56,10 @@ public class EventsService {
         return sportRepository.findAll();
     }
 
+    public Game findGameById(Long game_id) {
+        return gameRepository.findById(game_id).orElse(null);
+    }
+
     public List<Sport> findSport(String filterText) {
         if (filterText == null || filterText.isEmpty()) {
             return sportRepository.findAll();

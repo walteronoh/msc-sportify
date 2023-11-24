@@ -1,6 +1,7 @@
 package com.sportify.application.views.forms;
 
 import com.sportify.application.data.entity.venue.Venue;
+import com.sportify.application.data.entity.venue.VenueSection;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -16,20 +17,22 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.shared.Registration;
 
-public class VenueForm extends FormLayout {
-    Binder<Venue> binder = new BeanValidationBinder<>(Venue.class);
-    TextField name = new TextField("Venue Name");
+public class VenueSectionForm extends FormLayout {
+    Binder<VenueSection> binder = new BeanValidationBinder<>(VenueSection.class);
+    TextField name = new TextField("Name");
     TextField description = new TextField("Description");
     NumberField capacity = new NumberField("Venue Capacity");
-    TextField location = new TextField("Location");
+    TextField sectionMode = new TextField("Section Mode, i.e VIP");
 
     Button save = new Button("Save");
     Button delete = new Button("Delete");
     Button cancel = new Button("Cancel");
 
+    private VenueSection venueSection;
+
     private Venue venue;
 
-    public VenueForm() {
+    public VenueSectionForm() {
         addClassName("contact-form");
 
         binder.bindInstanceFields(this);
@@ -37,14 +40,18 @@ public class VenueForm extends FormLayout {
         add(
                 name,
                 description,
-                location,
+                sectionMode,
                 capacity,
                 createButtonLayout());
     }
 
     public void setVenue(Venue venue) {
         this.venue = venue;
-        binder.readBean(venue);
+    }
+
+    public void setVenueSection(VenueSection venueSection) {
+        this.venueSection = venueSection;
+        binder.readBean(venueSection);
     }
 
     private Component createButtonLayout() {
@@ -53,52 +60,53 @@ public class VenueForm extends FormLayout {
         cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
 
         save.addClickListener(event -> validateAndSave());
-        delete.addClickListener(event -> fireEvent(new DeleteEvent(null, venue)));
+        delete.addClickListener(event -> fireEvent(new DeleteEvent(null, venueSection)));
         cancel.addClickListener(event -> fireEvent(new CloseEvent(this)));
 
         save.addClickShortcut(Key.ENTER);
         cancel.addClickShortcut(Key.ESCAPE);
 
-        return new HorizontalLayout(save, cancel);
+        return new HorizontalLayout(save, delete, cancel);
     }
 
     private void validateAndSave() {
         try {
-            binder.writeBean(venue);
-            fireEvent(new SaveEvent(this, venue));
+            venueSection.setVenue(this.venue);
+            binder.writeBean(venueSection);
+            fireEvent(new SaveEvent(this, venueSection));
         } catch (ValidationException e) {
             e.printStackTrace();
         }
     }
 
     // Events
-    public static abstract class VenueFormEvent extends ComponentEvent<VenueForm> {
-        private final Venue venue;
+    public static abstract class VenueSectionFormEvent extends ComponentEvent<VenueSectionForm> {
+        private final VenueSection venueSection;
 
-        protected VenueFormEvent(VenueForm source, Venue venue) {
+        protected VenueSectionFormEvent(VenueSectionForm source, VenueSection venueSection) {
             super(source, false);
-            this.venue = venue;
+            this.venueSection = venueSection;
         }
 
-        public Venue getVenue() {
-            return venue;
-        }
-    }
-
-    public static class SaveEvent extends VenueFormEvent {
-        SaveEvent(VenueForm source, Venue venue) {
-            super(source, venue);
+        public VenueSection getVenueSection() {
+            return venueSection;
         }
     }
 
-    public static class DeleteEvent extends VenueFormEvent {
-        DeleteEvent(VenueForm source, Venue venue) {
-            super(source, venue);
+    public static class SaveEvent extends VenueSectionFormEvent {
+        SaveEvent(VenueSectionForm source, VenueSection venueSection) {
+            super(source, venueSection);
         }
     }
 
-    public static class CloseEvent extends VenueFormEvent {
-        CloseEvent(VenueForm source) {
+    public static class DeleteEvent extends VenueSectionFormEvent {
+        DeleteEvent(VenueSectionForm source, VenueSection venueSection) {
+            super(source, venueSection);
+        }
+    }
+
+    public static class CloseEvent extends VenueSectionFormEvent {
+        CloseEvent(VenueSectionForm source) {
             super(source, null);
         }
     }
