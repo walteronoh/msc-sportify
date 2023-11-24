@@ -5,7 +5,9 @@ import com.sportify.application.services.VenueService;
 import com.sportify.application.views.MainLayout;
 import com.sportify.application.views.forms.VenueForm;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -19,13 +21,16 @@ import jakarta.annotation.security.PermitAll;
 @Route(value = "venue", layout = MainLayout.class)
 @PermitAll
 public class VenueListView extends VerticalLayout {
-    //we need a grid and a text field
+    // we need a grid and a text field
     Grid<Venue> grid = new Grid<>(Venue.class);
     TextField filterText = new TextField();
+    Button viewSections = new Button("View Venue Sections");
 
     VenueForm venueForm;
 
     VenueService venueService;
+
+    Venue venue;
 
     public VenueListView(VenueService venueService) {
         this.venueService = venueService;
@@ -34,18 +39,24 @@ public class VenueListView extends VerticalLayout {
 
         configureGrid();
         configureForm();
+        configureViewSection();
 
         add(
                 getToolBar(),
-                getContent()
-        );
+                getContent());
 
         updateList();
 
         closeEditor();
     }
 
+    private void configureViewSection() {
+        viewSections.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
+    }
+
     private void closeEditor() {
+        this.venue = null;
+        viewSections.setVisible(false);
         venueForm.setVenue(null);
         venueForm.setVisible(false);
         removeClassName("editing");
@@ -56,7 +67,10 @@ public class VenueListView extends VerticalLayout {
     }
 
     private Component getContent() {
+        viewSections.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
+        viewSections.setVisible(false);
         HorizontalLayout horizontalLayout = new HorizontalLayout(grid, venueForm);
+        horizontalLayout.add(viewSections);
         horizontalLayout.setFlexGrow(2, grid);
         horizontalLayout.setFlexGrow(1, venueForm);
 
@@ -65,17 +79,17 @@ public class VenueListView extends VerticalLayout {
 
         return horizontalLayout;
     }
+
     private void configureForm() {
         venueForm = new VenueForm();
         venueForm.setWidth("25em");
-
 
         venueForm.addSaveListener(this::saveVenue);
         venueForm.addDeleteListener(this::deleteVenue);
         venueForm.addCloseListener(this::closeVenue);
     }
 
-    private  void saveVenue(VenueForm.SaveEvent event) {
+    private void saveVenue(VenueForm.SaveEvent event) {
         venueService.saveVenue(event.getVenue());
         updateList();
         closeEditor();
@@ -113,15 +127,22 @@ public class VenueListView extends VerticalLayout {
     private void configureGrid() {
         grid.addClassName("contact-grid");
         setSizeFull();
-        grid.setColumns("name", "description");        
+        grid.setColumns("name", "description");
+        grid.addColumn(v -> v.getLocation()).setHeader("Location");
+        grid.addColumn(v -> v.getCapacity()).setHeader("Capacity");
 
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
-        grid.asSingleSelect().addValueChangeListener(e -> editVenue(e.getValue()));
+        grid.asSingleSelect().addValueChangeListener(e -> {
+            editVenue(e.getValue());
+            viewSections.addClickListener(
+                    event -> UI.getCurrent().navigate(VenueSectionListView.class, e.getValue().getId()));
+            viewSections.setVisible(true);
+        });
     }
 
     private void editVenue(Venue venue) {
-        if(venue == null) {
+        if (venue == null) {
             closeEditor();
         } else {
             venueForm.setVenue(venue);
@@ -131,4 +152,3 @@ public class VenueListView extends VerticalLayout {
     }
 
 }
-

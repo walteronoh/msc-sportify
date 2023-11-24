@@ -1,14 +1,16 @@
 package com.sportify.application.views.list;
 
 import com.sportify.application.data.entity.event.Game;
+import com.sportify.application.data.entity.event.Sport;
 import com.sportify.application.services.EventsService;
+import com.sportify.application.services.VenueService;
 import com.sportify.application.views.MainLayout;
 import com.sportify.application.views.forms.EventForm;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dialog.Dialog;
-import com.vaadin.flow.component.dialog.DialogVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
@@ -26,9 +28,11 @@ import jakarta.annotation.security.PermitAll;
 public class EventListView extends VerticalLayout {
     EventForm eventForm;
     EventsService eventsService;
+    VenueService venueService;
 
-    public EventListView(EventsService eventsService) {
+    public EventListView(EventsService eventsService, VenueService venueService) {
         this.eventsService = eventsService;
+        this.venueService = venueService;
 
         addClassName("list-view");
         setSizeFull();
@@ -43,7 +47,7 @@ public class EventListView extends VerticalLayout {
     }
 
     private void configureEventForm() {
-        eventForm = new EventForm(eventsService.findAllSports());
+        eventForm = new EventForm(eventsService.findAllSports(), venueService.findAllVenues());
         Game game = new Game();
         eventForm.setGame(game);
         eventForm.setWidth("25em");
@@ -110,6 +114,9 @@ public class EventListView extends VerticalLayout {
 
             Button joinButton = new Button("Attend");
             joinButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+            joinButton.addClickListener(event -> {
+                UI.getCurrent().navigate(ReservationListView.class, game.getId());
+            });
 
             HorizontalLayout actions = new HorizontalLayout(joinButton);
 

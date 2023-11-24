@@ -2,6 +2,7 @@ package com.sportify.application.views.forms;
 
 import com.sportify.application.data.entity.event.Game;
 import com.sportify.application.data.entity.event.Sport;
+import com.sportify.application.data.entity.venue.Venue;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -24,10 +25,11 @@ import java.util.List;
 
 public class EventForm extends FormLayout {
     Binder<Game> binder = new BeanValidationBinder<>(Game.class);
-    TextField title = new TextField("Event Title");   
+    TextField title = new TextField("Event Title");
     TextField description = new TextField("Description");
     DatePicker gameDate = new DatePicker("Event Date");
     ComboBox<Sport> sport = new ComboBox<>("Sports");
+    ComboBox<Venue> venue = new ComboBox<>("Venue");
     MultiFileMemoryBuffer buffer = new MultiFileMemoryBuffer();
     Upload upload = new Upload(buffer);
 
@@ -36,18 +38,23 @@ public class EventForm extends FormLayout {
 
     private Game game;
 
-    public EventForm(List<Sport> sports) {
+    public EventForm(List<Sport> sports, List<Venue> venues) {
         addClassName("contact-form");
 
         binder.bindInstanceFields(this);
+        // Set sports comboBox
         sport.setItems(sports);
         sport.setItemLabelGenerator(Sport::getName);
+        // Set venue comboBox
+        venue.setItems(venues);
+        venue.setItemLabelGenerator(Venue::getName);
 
         add(
                 title,
                 description,
                 gameDate,
                 sport,
+                venue,
                 // upload,
                 createButtonLayout());
     }

@@ -8,6 +8,7 @@ import com.sportify.application.data.entity.AbstractEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Venue extends AbstractEntity {
@@ -15,15 +16,19 @@ public class Venue extends AbstractEntity {
     private String name;
     @NotEmpty
     private String description;
+    @NotNull
+    private Double capacity;
+    @NotEmpty
     private String location;
     @OneToMany
     private Set<VenueSection> seatSections = new HashSet<>();
 
-    public Venue () {}
+    public Venue() {
+    }
 
     public Venue(String name_,
-                String loc,
-                String desc) {
+            String loc,
+            String desc) {
         this.name = name_;
         this.location = loc;
         this.description = desc;
@@ -44,19 +49,32 @@ public class Venue extends AbstractEntity {
     public String getDescription() {
         return this.description;
     }
+
+    public void setCapacity(Double capacity) {
+        this.capacity = capacity;
+    }
+
+    public Double getCapacity() {
+        return this.capacity;
+    }
+
     public String getLocation() {
         return location;
     }
+
     public void setLocation(String location) {
         this.location = location;
     }
+
     public void setSeatSections(Set<VenueSection> seatSections) {
         this.seatSections.clear();
         this.seatSections.addAll(seatSections);
     }
+
     public Set<VenueSection> getSeatSections() {
         return new HashSet<>(seatSections);
     }
+
     public boolean addSeatSection(VenueSection sec) {
         return this.seatSections.add(sec);
     }
