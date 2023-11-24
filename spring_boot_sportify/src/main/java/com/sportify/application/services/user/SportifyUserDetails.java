@@ -9,19 +9,31 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.sportify.application.data.entity.User.BUser;
+import com.sportify.application.data.entity.User.GenericUser;
+import com.sportify.application.data.entity.User.Promoter;
 
-public class MyUserDetails implements UserDetails {
+public class SportifyUserDetails implements UserDetails {
 
-    private BUser user;
-    public MyUserDetails(BUser user) {
+    private GenericUser user;
+    private GrantedAuthority role;
+    private GrantedAuthority userAuth = new SimpleGrantedAuthority("USER");
+    private GrantedAuthority adminAuth = new SimpleGrantedAuthority("ADMIN");
+
+    public SportifyUserDetails(BUser user) {
         this.user = user;
+        this.role = new SimpleGrantedAuthority("BOOKING");
+    }
+    public SportifyUserDetails(Promoter user) {
+        this.user = user;
+        this.role = new SimpleGrantedAuthority("PROMOTER");
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority booking = new SimpleGrantedAuthority("BOOKING");
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(booking);
+        authorities.add(role);
+        authorities.add(userAuth);
+        authorities.add(adminAuth);
         return authorities;
     }
 

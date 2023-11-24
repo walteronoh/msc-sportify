@@ -87,3 +87,4 @@ nb-configuration.xml
 spring_boot_sportify/db/
 *.db
 db/
+!*/sportify_db.mv.db

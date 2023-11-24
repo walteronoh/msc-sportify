@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 
+@Converter(autoApply = true)
 public class RowListConverter implements AttributeConverter<List<Integer>, String> {
     @Override
     public String convertToDatabaseColumn(List<Integer> rows) {

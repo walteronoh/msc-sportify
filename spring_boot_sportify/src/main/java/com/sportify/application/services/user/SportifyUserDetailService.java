@@ -12,7 +12,7 @@ import com.sportify.application.data.repository.user.BUserRepository;
 import com.sportify.application.data.repository.user.PromoterRepository;
 
 @Service
-public class MyUserDetailService implements UserDetailsService{
+public class SportifyUserDetailService implements UserDetailsService{
     @Autowired
     private BUserRepository userRepository;
     @Autowired
@@ -20,15 +20,15 @@ public class MyUserDetailService implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        BUser user = userRepository.findByUsername(username);
+        BUser user = userRepository.findByName(username);
         Promoter promoter;
         if (user != null) {
-            return new MyUserDetails(user);
+            return new SportifyUserDetails(user);
         }
         else {
-            promoter = promoterRepository.findByUsername(username);
+            promoter = promoterRepository.findByName(username);
             if (promoter != null) {
-                return new PromoterDetails(promoter);
+                return new SportifyUserDetails(promoter);
             }
         }
         throw new UsernameNotFoundException(username);

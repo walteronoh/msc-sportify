@@ -21,3 +21,4 @@ error-screenshots/
 webpack.generated.js
 db/
 *.db
+!db/sportify_db.mv.db

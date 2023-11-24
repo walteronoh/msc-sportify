@@ -7,26 +7,33 @@ import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 
 import com.sportify.application.data.entity.AbstractEntity;
+import com.sportify.application.data.entity.converters.BookingStatusArrayConverter;
 import com.sportify.application.data.entity.enums.BookingStatus;
 import com.sportify.application.data.utilities.Pair;
 import com.vladmihalcea.hibernate.type.array.EnumArrayType;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
 
 @Entity
 public class SeatingSection extends AbstractEntity {
 
-    @Type(value = EnumArrayType.class,
-            parameters = @Parameter(
-                    name = "sql_array_type",
-                    value = "seat_status"
-            )
-    )
-    @Column(
-            name = "seat",
-            columnDefinition = "seat_status[][]"
+    // @Type(value = EnumArrayType.class,
+    //         parameters = @Parameter(
+    //                 name = "sql_array_type",
+    //                 // name = IntArrayType.SQL_ARRAY_TYPE,
+    //                 value = "text"
+    //         )
+    // )
+    // @Column(
+    //         name = "seat"
+    //         // , columnDefinition = "seat_status[][]"
+    //         , columnDefinition = "text[][]"
+    // )
+    @Convert(
+        converter = BookingStatusArrayConverter.class
     )
     private BookingStatus[][] seat;
     private int capacity;

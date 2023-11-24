@@ -62,3 +62,9 @@ INSERT INTO "CONTACT" (ID, VERSION, EMAIL,FIRST_NAME,LAST_NAME,COMPANY_ID,STATUS
 (58, 1, 'bryan.shaw@ha.ee', 'Bryan', 'Shaw', 9, 1),
 (59, 1, 'essie.adams@iliat.cw', 'Essie', 'Adams', 8, 5),
 (60, 1, 'gary.osborne@do.ga', 'Gary', 'Osborne', 7, 5);
+INSERT INTO "BUSER" (ID, VERSION,NAME,EMAIL,PASSWORD) VALUES
+(61, 1, 'user', 'user@sportify.com', '{noop}user')
+(62, 1, 'admin', 'admin@sportify.com', '{noop}admin')
+INSERT INTO "PROMOTER" (ID, VERSION,NAME,EMAIL,PASSWORD) VALUES
+(63, 1, 'promoter', 'promoter@sportify.com', '{noop}promoter')
+(64, 1, 'admin', 'admin@sportify.com', '{noop}admin')
