@@ -1,10 +1,12 @@
 package com.sportify.application.views.list;
 
+import com.sportify.application.data.entity.booking.Booking;
 import com.sportify.application.services.BookingService;
 import com.sportify.application.views.MainLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
@@ -36,12 +38,16 @@ public class BookingListView extends VerticalLayout {
         VerticalLayout verticalLayout = new VerticalLayout();
         bookingService.findAllBookings().forEach(booking -> {
             Div descriptionDiv = new Div();
-            descriptionDiv.setText("Description");
+            descriptionDiv.setText("Description : ");
 
             Button payButton = new Button("Pay");
+            Button showTicket = new Button("View Ticket");
+
             Button cancelButton = new Button("Cancel");
 
-            HorizontalLayout actions = new HorizontalLayout(payButton, cancelButton);
+            HorizontalLayout actions = new HorizontalLayout(
+                    booking.isPaidInFull() ? showTicket : new HorizontalLayout(payButton, cancelButton),
+                    getPaymentStatus(booking));
 
             VerticalLayout bookingLayout = new VerticalLayout();
             bookingLayout.add(descriptionDiv, actions);
@@ -54,5 +60,17 @@ public class BookingListView extends VerticalLayout {
 
         });
         return verticalLayout;
+    }
+
+    public Span getPaymentStatus(Booking booking) {
+        Span statusSpan = new Span();
+        if (booking.isPaidInFull()) {
+            statusSpan.add("Paid");
+            statusSpan.getElement().getThemeList().add("badge success");
+            return statusSpan;
+        }
+        statusSpan.add("Balance: " + booking.getBalance());
+        statusSpan.getElement().getThemeList().add("badge error");
+        return statusSpan;
     }
 }

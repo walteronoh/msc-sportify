@@ -131,7 +131,8 @@ public class VenueSectionListView extends VerticalLayout implements HasUrlParame
         setSizeFull();
         grid.setColumns("name", "description");
         grid.addColumn(v -> v.getSectionMode()).setHeader("Section Mode");
-        grid.addColumn(v -> v.getCapacity()).setHeader("Capacity");
+        grid.addColumn(v -> v.getCapacity()).setHeader("Capacity");        
+        grid.addColumn(v -> v.getSeatPrice()).setHeader("Seat Price");
 
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 

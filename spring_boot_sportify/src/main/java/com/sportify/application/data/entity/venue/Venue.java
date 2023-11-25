@@ -1,11 +1,13 @@
 package com.sportify.application.data.entity.venue;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.sportify.application.data.entity.AbstractEntity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -22,6 +24,9 @@ public class Venue extends AbstractEntity {
     private String location;
     @OneToMany
     private Set<VenueSection> seatSections = new HashSet<>();
+
+    @OneToMany(mappedBy = "venue", fetch = FetchType.EAGER)
+    private List<VenueSection> venueSections;
 
     public Venue() {
     }
@@ -77,5 +82,9 @@ public class Venue extends AbstractEntity {
 
     public boolean addSeatSection(VenueSection sec) {
         return this.seatSections.add(sec);
+    }
+
+    public List<VenueSection> getVenueSections() {
+        return this.venueSections;
     }
 }
