@@ -93,6 +93,7 @@ public class BookingForm extends FormLayout {
 
     private void validateAndSave() {
         try {
+            booking.setGame(game);
             binder.writeBean(booking);
             fireEvent(new SaveBooking(this, booking));
             // Redirect to Bookings
@@ -124,6 +125,12 @@ public class BookingForm extends FormLayout {
 
     public static class SaveBooking extends BookingFormEvent {
         SaveBooking(BookingForm source, Booking booking) {
+            super(source, booking);
+        }
+    }
+
+    public static class DeleteBooking extends BookingFormEvent {
+        DeleteBooking(BookingForm source, Booking booking) {
             super(source, booking);
         }
     }

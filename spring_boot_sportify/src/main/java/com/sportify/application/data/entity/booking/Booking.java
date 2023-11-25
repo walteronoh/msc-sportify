@@ -1,20 +1,23 @@
 package com.sportify.application.data.entity.booking;
 
 import java.sql.Date;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.sportify.application.data.entity.AbstractEntity;
-import com.sportify.application.data.entity.User.BUser;
 import com.sportify.application.data.entity.event.Game;
+import com.sportify.application.data.entity.payment.Payment;
 import com.sportify.application.data.entity.venue.VenueSection;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -23,8 +26,8 @@ public class Booking extends AbstractEntity {
     // private Boolean attended = false;
     // @ManyToOne
     // private BUser user;
-    // @ManyToOne
-    // private Game game;
+    @ManyToOne
+    private Game game;
     @Temporal(TemporalType.DATE)
     @Column(updatable = false)
     @CreationTimestamp
@@ -45,13 +48,16 @@ public class Booking extends AbstractEntity {
     @ManyToOne
     VenueSection venueSection;
 
-    // public Game getGame() {
-    //     return game;
-    // }
+    @OneToMany(mappedBy = "booking", fetch = FetchType.EAGER)
+    private List<Payment> payments;
 
-    // public void setGame(Game game) {
-    //     this.game = game;
-    // }
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
 
     // public Date getBookingDate() {
     // return bookingDate;
@@ -126,10 +132,22 @@ public class Booking extends AbstractEntity {
     }
 
     public double getBalance() {
-        return this.totalBill - this.amountPaid;
+        return this.totalBill - this.calculateTotalPayments();
     }
 
     public boolean isPaidInFull() {
         return getBalance() <= 0;
+    }
+
+    public List<Payment> getBookingPayments() {
+        return this.payments;
+    }
+
+    public double calculateTotalPayments() {
+        AtomicReference<Double> totalPayment = new AtomicReference<>(0.0);
+        this.payments.forEach(payment -> {
+            totalPayment.getAndUpdate(amount -> amount + payment.getAmount());
+        });
+        return totalPayment.get();
     }
 }

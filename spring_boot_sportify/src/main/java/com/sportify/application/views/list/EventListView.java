@@ -153,10 +153,10 @@ public class EventListView extends VerticalLayout {
     }
 
     private HorizontalLayout createEventStats(Game game) {
-        Span capacity = new Span("Capacity: " + game.getVenue().getCapacity());
+        Span capacity = new Span("Capacity: " + game.getTotalSeats());
         capacity.getElement().getThemeList().add("badge contrast");
 
-        Span remaining = new Span("Remaining: 20");
+        Span remaining = new Span("Remaining: " + game.calculateRemainingSeats());
         remaining.getElement().getThemeList().add("badge");
 
         HorizontalLayout horizontalLayout = new HorizontalLayout(capacity, remaining,

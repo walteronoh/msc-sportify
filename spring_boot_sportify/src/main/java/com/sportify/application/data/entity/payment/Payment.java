@@ -1,9 +1,5 @@
 package com.sportify.application.data.entity.payment;
 
-import java.security.Timestamp;
-
-import org.hibernate.annotations.CreationTimestamp;
-
 import com.sportify.application.data.entity.AbstractEntity;
 import com.sportify.application.data.entity.User.BUser;
 import com.sportify.application.data.entity.booking.Booking;
@@ -12,17 +8,14 @@ import com.sportify.application.data.entity.enums.PaymentMethod;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Payment extends AbstractEntity {
+    @NotNull
     @Column(updatable = false)
-    private Float amount;
-    @Temporal(TemporalType.DATE)
-    @Column(updatable = false)
-    @CreationTimestamp
-    private Timestamp payTime;
+    private double amount;
+    @NotNull
     @Column(updatable = false)
     private PaymentMethod paymentMethod;
     @Column(updatable = false)
@@ -32,7 +25,8 @@ public class Payment extends AbstractEntity {
     @ManyToOne
     private BUser user;
 
-    public Payment () {}
+    public Payment() {
+    }
 
     public Payment(BUser user, Booking booking,
             PaymentMethod method, String receipt,
@@ -44,42 +38,48 @@ public class Payment extends AbstractEntity {
         this.amount = amount;
     }
 
-    public float getAmount() {
+    public double getAmount() {
         return amount;
     }
+
     public PaymentMethod getPaymentMethod() {
         return paymentMethod;
     }
+
     public String getReceiptNumber() {
         return receiptNumber;
     }
+
     public Booking getBooking() {
         return booking;
     }
+
     public BUser getUser() {
         return user;
     }
 
-    public void setAmount(Float amount) {
-        if (this.amount == null) {
-            this.amount = amount;
-        }
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
+
     public void setBooking(Booking booking) {
         if (this.booking == null) {
             this.booking = booking;
         }
     }
+
     public void setPaymentMethod(PaymentMethod paymentMethod) {
         if (this.paymentMethod == null) {
             this.paymentMethod = paymentMethod;
         }
     }
+
     public void setReceiptNumber(String receiptNumber) {
         if (this.receiptNumber == null) {
             this.receiptNumber = receiptNumber;
         }
     }
+
     public void setUser(BUser user) {
         if (this.user == null) {
             this.user = user;

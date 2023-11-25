@@ -3,14 +3,17 @@ package com.sportify.application.data.entity.event;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 import com.sportify.application.data.entity.AbstractEntity;
+import com.sportify.application.data.entity.booking.Booking;
 import com.sportify.application.data.entity.venue.Venue;
 import com.sportify.application.data.entity.venue.VenueSection;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
@@ -32,6 +35,9 @@ public class Game extends AbstractEntity {
     private Venue venue;
     // @NotBlank
     private boolean played = false;
+
+    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
+    private List<Booking> bookings;
 
     public void setTitle(String title) {
         this.title = title;
@@ -94,5 +100,29 @@ public class Game extends AbstractEntity {
             return venue.getVenueSections();
         }
         return new ArrayList<VenueSection>();
+    }
+
+    public double getTotalSeats() {
+        AtomicReference<Double> totalSeats = new AtomicReference<>(0.0);
+        this.venue.getVenueSections().forEach(section -> {
+            totalSeats.getAndUpdate(seat -> seat + section.getCapacity());
+        });
+        return totalSeats.get();
+    }
+
+    public List<Booking> getBookings() {
+        return this.bookings;
+    }
+
+    public double getBookedSeats() {
+        AtomicReference<Double> bookedSeats = new AtomicReference<>(0.0);
+        this.bookings.forEach(booking -> {
+            bookedSeats.getAndUpdate(seat -> seat + booking.getTotalReserved());
+        });
+        return bookedSeats.get();
+    }
+
+    public double calculateRemainingSeats() {
+        return this.getTotalSeats() - this.getBookedSeats();
     }
 }
