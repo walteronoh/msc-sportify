@@ -27,6 +27,7 @@ public class Notice extends AbstractEntity {
     @Column(name="`TIME`", updatable = false,insertable = false)
     private Timestamp timestamp;
 
+    public Notice () {}
     public Notice(Notifiable notifiable, String description2, Severity severity2) {
         this.sender = notifiable.getClass().descriptorString();
         this.description = description2;

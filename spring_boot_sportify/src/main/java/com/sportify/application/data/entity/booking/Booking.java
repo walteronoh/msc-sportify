@@ -1,24 +1,27 @@
 package com.sportify.application.data.entity.booking;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.sportify.application.data.entity.AbstractEntity;
+import com.sportify.application.data.entity.User.BUser;
+import com.sportify.application.data.entity.enums.PaymentMethod;
 import com.sportify.application.data.entity.event.Game;
 import com.sportify.application.data.entity.payment.Payment;
 import com.sportify.application.data.entity.venue.VenueSection;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Booking extends AbstractEntity {
@@ -36,21 +39,74 @@ public class Booking extends AbstractEntity {
     // private Boolean cancelled = false;
 
     private Boolean paidInFull = false;
-    // @NotEmpty
-    // private Boolean madeReservations;
-    @NotNull
-    private double totalReserved = 1;
-    @NotNull
-    private double totalBill;
-    @NotNull
-    private double amountPaid = 1;
-    @NotNull
-    @ManyToOne
-    VenueSection venueSection;
+    @OneToMany
+    private Set<Payment> payments = new HashSet<>();
+    @NotEmpty
+    private Boolean madeReservations;
+    @NotEmpty
+    private Float totalBill;
 
-    @OneToMany(mappedBy = "booking", fetch = FetchType.EAGER)
-    private List<Payment> payments;
+    public Booking (BUser u,
+                    Game g,
+                    Set<Reservation> r
+                    ) {
+        this.user = u;
+        this.game = g;
+        this.reservations = r;
+        this.madeReservations = g.makeReservations(r);
+        float sum = 0;
+        for (Reservation rv: r) {
+            sum += rv.getCost();
+        }
+        this.totalBill = sum;
+    }
+    public Booking() {}
 
+    public void makePayment(Float amount,
+                            PaymentMethod method,
+                            String receipt ) {
+        var pmt = new Payment(this.user, this, method, receipt, amount);
+        this.payments.add(pmt);
+
+        float totalPaid = 0;
+        for (Payment p: payments) {
+            totalPaid += p.getAmount();
+        }
+        if (totalPaid >= totalBill) {
+            this.paidInFull = true;
+        }
+    }
+    public void setGame(Game game) {
+        if (game != null) {
+            this.game = game;
+        }
+    }
+    public void setReservations(Set<Reservation> reservations_) {
+        if (reservations_ != null) {
+            if(this.reservations == null || this.reservations.isEmpty()) {
+                this.reservations = reservations_;
+                this.madeReservations = this.game.makeReservations(reservations);
+            }
+            else {
+                madeReservations = !game.cancelReservations(this.reservations);
+                madeReservations = game.makeReservations(reservations_);
+            }
+        }
+    }
+    public boolean reserve() {
+        if(!this.madeReservations) {
+            this.madeReservations = this.game.makeReservations(reservations);
+        }
+        return this.madeReservations;
+    }
+    public BUser getUser() {
+        return user;
+    }
+    public void setUser(BUser user) {
+        if (user != null) {
+            this.user = user;
+        }
+    }
     public Game getGame() {
         return game;
     }

@@ -1,5 +1,7 @@
 package com.sportify.application.views;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.sportify.application.security.SecurityService;
 import com.sportify.application.views.list.BookingListView;
 import com.sportify.application.views.list.EventListView;
@@ -20,7 +22,7 @@ import com.vaadin.flow.router.RouterLink;
 public class MainLayout extends AppLayout {
     private final SecurityService securityService;
 
-    public MainLayout(SecurityService securityService) {
+    public MainLayout(@Autowired SecurityService securityService) {
         this.securityService = securityService;
         createHeader();
         createDrawer();

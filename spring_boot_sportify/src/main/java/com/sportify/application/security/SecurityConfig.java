@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -25,24 +27,43 @@ public class SecurityConfig extends VaadinWebSecurity {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth ->
                 auth.requestMatchers(
-                        AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/images/*.png")).permitAll());
+                        AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/images/*.png"),
+                        AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/**"),
+                        AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/**"),
+                        AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/h2-console/**"),
+                        AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/h2-console/**")).permitAll());
         super.configure(http);
         setLoginView(http, LoginView.class);
     }
 
     @Bean
-    protected UserDetailsService user() {
+    public UserDetailsService user() {
+        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         UserDetails user = User.builder()
                 .username("user")
-                .password("{noop}user")
+                .password(encoder.encode("password"))
                 .roles("USER")
                 .build();
         UserDetails admin = User.builder()
                 .username("admin")
-                .password("{noop}admin")
+                .password(encoder.encode("admin"))
                 .roles("USER", "ADMIN")
                 .build();
-        return new InMemoryUserDetailsManager(user, admin);
-        // return new SportifyUserDetailService();
+        UserDetails promoter = User.builder()
+                .username("promoter")
+                .password(encoder.encode("promoter"))
+                .roles("USER")
+                .build();
+        return new InMemoryUserDetailsManager(user, admin, promoter);
     }
+
+    // @Bean
+    // public SportifyUserDetailService sportifyUserDetails(){
+    //     return new SportifyUserDetailService();
+    // }
+
+    // @Bean
+    // public static PasswordEncoder passwordEncoder() {
+    //     return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    // }
 }

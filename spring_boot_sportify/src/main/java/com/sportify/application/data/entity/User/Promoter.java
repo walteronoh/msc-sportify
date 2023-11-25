@@ -19,7 +19,7 @@ public class Promoter extends GenericUser{
     public Promoter () {
         super();
     }
-    Promoter(String name_,
+    public Promoter(String name_,
             String email_,
             String pass) {
         super(name_, email_, pass);

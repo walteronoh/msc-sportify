@@ -8,6 +8,6 @@ import com.sportify.application.data.entity.User.BUser;
 @Repository
 public interface BUserRepository extends JpaRepository<BUser, Long>{
 
-    BUser findByName(String name);
+    public BUser findDistinctByName(String name);
     
 }

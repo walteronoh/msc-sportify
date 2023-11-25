@@ -1,4 +1,4 @@
-package com.sportify.application.services.user;
+package com.sportify.application.security;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,16 +16,16 @@ public class SportifyUserDetails implements UserDetails {
 
     private GenericUser user;
     private GrantedAuthority role;
-    private GrantedAuthority userAuth = new SimpleGrantedAuthority("USER");
-    private GrantedAuthority adminAuth = new SimpleGrantedAuthority("ADMIN");
+    private GrantedAuthority userAuth = new SimpleGrantedAuthority("ROLE_USER");
+    private GrantedAuthority adminAuth = new SimpleGrantedAuthority("ROLE_ADMIN");
 
     public SportifyUserDetails(BUser user) {
         this.user = user;
-        this.role = new SimpleGrantedAuthority("BOOKING");
+        this.role = new SimpleGrantedAuthority("ROLE_BOOKING");
     }
     public SportifyUserDetails(Promoter user) {
         this.user = user;
-        this.role = new SimpleGrantedAuthority("PROMOTER");
+        this.role = new SimpleGrantedAuthority("ROLE_PROMOTER");
     }
 
     @Override

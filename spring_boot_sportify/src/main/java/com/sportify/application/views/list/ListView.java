@@ -13,11 +13,12 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import jakarta.annotation.security.PermitAll;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 @PageTitle("Contacts")
 @Route(value = "contacts", layout = MainLayout.class)
-@PermitAll
+// @PermitAll
+@AnonymousAllowed
 public class ListView extends VerticalLayout {
     //we need a grid and a text field
     Grid<Contact> grid = new Grid<>(Contact.class);

@@ -3,13 +3,11 @@ package com.sportify.application.views.list;
 import java.util.List;
 
 import com.sportify.application.data.entity.event.Game;
-import com.sportify.application.data.entity.event.Sport;
 import com.sportify.application.data.entity.venue.VenueSection;
 import com.sportify.application.services.EventsService;
 import com.sportify.application.services.VenueService;
 import com.sportify.application.views.MainLayout;
 import com.sportify.application.views.forms.EventForm;
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -29,6 +27,7 @@ import jakarta.annotation.security.PermitAll;
 @PageTitle("Events | Sportify")
 @Route(value = "", layout = MainLayout.class)
 @PermitAll
+// @AnonymousAllowed
 public class EventListView extends VerticalLayout {
     EventForm eventForm;
     EventsService eventsService;

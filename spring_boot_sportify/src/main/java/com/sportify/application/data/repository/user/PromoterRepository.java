@@ -8,6 +8,6 @@ import com.sportify.application.data.entity.User.Promoter;
 @Repository
 public interface PromoterRepository extends JpaRepository<Promoter, Long>{
 
-    Promoter findByName(String username);
+    public Promoter findDistinctByName(String username);
     
 }

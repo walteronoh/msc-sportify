@@ -22,7 +22,7 @@ public class Reservation extends AbstractEntity {
         converter = ListPairConverter.class
     )
     @Column(insertable = false, updatable = false)
-    private final List <Pair <Integer, Integer>> seats = new ArrayList<>();
+    private List <Pair <Integer, Integer>> seats = new ArrayList<>();
     private float cost;
 
     public Reservation (SeatingSection s, List <Pair <Integer, Integer>> seats) {
@@ -31,6 +31,7 @@ public class Reservation extends AbstractEntity {
         // this.cost = s.getPrice() * seats.size();
         this.cost = 0;
     }
+    public Reservation () {}
 
     public float getCost(){
         return this.cost;
@@ -42,6 +43,19 @@ public class Reservation extends AbstractEntity {
 
     public List <Pair <Integer, Integer>> getSeats() {
         return this.seats;
+    }
+    public void setCost(float cost) {
+        this.cost = cost;
+    }
+    public void setSection(SeatingSection section) {
+        this.section = section;
+    }
+    public void setSeats(List <Pair <Integer, Integer>> seats_) {
+        if (seats_ != null) {
+            if(this.seats == null || this.seats.isEmpty()) {
+                this.seats = seats_;
+            }
+        }
     }
 
 }
