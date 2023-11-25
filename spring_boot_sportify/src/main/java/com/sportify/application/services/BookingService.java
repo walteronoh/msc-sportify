@@ -26,6 +26,10 @@ public class BookingService {
         bookingRepository.save(booking);
     }
 
+    public void deleteBooking(Booking booking) {
+        bookingRepository.delete(booking);
+    }
+
     public List<Booking> findAllBookings() {
         return bookingRepository.findAll();
     }

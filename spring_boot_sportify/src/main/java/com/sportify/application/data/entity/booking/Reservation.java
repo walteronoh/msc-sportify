@@ -28,7 +28,8 @@ public class Reservation extends AbstractEntity {
     public Reservation (SeatingSection s, List <Pair <Integer, Integer>> seats) {
         this.section = s;
         this.seats.addAll(seats);
-        this.cost = s.getPrice() * seats.size();
+        // this.cost = s.getPrice() * seats.size();
+        this.cost = 0;
     }
 
     public float getCost(){
