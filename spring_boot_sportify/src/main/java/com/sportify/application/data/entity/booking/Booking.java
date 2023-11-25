@@ -1,161 +1,135 @@
 package com.sportify.application.data.entity.booking;
 
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.sportify.application.data.entity.AbstractEntity;
 import com.sportify.application.data.entity.User.BUser;
-import com.sportify.application.data.entity.enums.PaymentMethod;
 import com.sportify.application.data.entity.event.Game;
-import com.sportify.application.data.entity.notification.Notice;
-import com.sportify.application.data.entity.payment.Payment;
+import com.sportify.application.data.entity.venue.VenueSection;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Booking extends AbstractEntity {
-    @NotEmpty
-    private Boolean attended = false;
-    @ManyToOne
-    private BUser user;
-    @ManyToOne
-    private Game game;
+    // @NotEmpty
+    // private Boolean attended = false;
+    // @ManyToOne
+    // private BUser user;
+    // @ManyToOne
+    // private Game game;
     @Temporal(TemporalType.DATE)
     @Column(updatable = false)
     @CreationTimestamp
     private Date bookingDate;
-    @NotEmpty
-    private Boolean cancelled = false;
-    @OneToMany
-    private Set<Reservation> reservations = new HashSet<>();
-    @OneToMany
-    private Set<Notice> viewedNotices = new HashSet<>();
-    @NotEmpty
+    // @NotEmpty
+    // private Boolean cancelled = false;
+
     private Boolean paidInFull = false;
-    @OneToMany
-    private Set<Payment> payments = new HashSet<>();
-    @NotEmpty
-    private Boolean madeReservations;
-    @NotEmpty
-    private Float totalBill;
+    // @NotEmpty
+    // private Boolean madeReservations;
+    @NotNull
+    private double totalReserved = 1;
+    @NotNull
+    private double totalBill;
+    @NotNull
+    private double amountPaid = 1;
+    @NotNull
+    @ManyToOne
+    VenueSection venueSection;
 
-    public Booking (BUser u,
-                    Game g,
-                    Set<Reservation> r
-                    ) {
-        this.user = u;
-        this.game = g;
-        this.reservations = r;
-        this.madeReservations = g.makeReservations(r);
-        float sum = 0;
-        for (Reservation rv: r) {
-            sum += rv.getCost();
-        }
-        this.totalBill = sum;
-    }
-    public void makePayment(Float amount,
-                            PaymentMethod method,
-                            String receipt ) {
-        var pmt = new Payment(this.user, this, method, receipt, amount);
-        this.payments.add(pmt);
+    // public Game getGame() {
+    //     return game;
+    // }
 
-        float totalPaid = 0;
-        for (Payment p: payments) {
-            totalPaid += p.getAmount();
-        }
-        if (totalPaid >= totalBill) {
-            this.paidInFull = true;
-        }
-    }
-    public boolean reserve() {
-        if(!this.madeReservations) {
-            this.madeReservations = this.game.makeReservations(reservations);
-        }
-        return this.madeReservations;
-    }
-    public BUser getUser() {
-        return user;
-    }
-    public Game getGame() {
-        return game;
-    }
-    public Date getBookingDate() {
-        return bookingDate;
-    }
-    public Set<Payment> getPayments() {
-        return new HashSet<>(payments);
-    }
+    // public void setGame(Game game) {
+    //     this.game = game;
+    // }
 
-    public void setAttended(Boolean attended) {
-        this.attended = attended;
-    }
+    // public Date getBookingDate() {
+    // return bookingDate;
+    // }
 
-    public Boolean getAttended() {
-        return this.attended;
-    }
-    public void attend() {
-        setAttended(true);
-    }
+    // public void setAttended(Boolean attended) {
+    // this.attended = attended;
+    // }
 
-    public void setCancelled(Boolean cancelled) {
-        this.cancelled = cancelled;
-    }
+    // public Boolean getAttended() {
+    // return this.attended;
+    // }
 
-    public Boolean getCancelled() {
-        return this.cancelled;
+    // public void attend() {
+    // setAttended(true);
+    // }
+
+    // public void setCancelled(Boolean cancelled) {
+    // this.cancelled = cancelled;
+    // }
+
+    // public Boolean getCancelled() {
+    // return this.cancelled;
+    // }
+
+    // public boolean isCancelled() {
+    // return this.cancelled;
+    // }
+
+    // public boolean isPaidInFull() {
+    // return paidInFull;
+    // }
+
+    public Boolean getPaidInFull() {
+        return this.paidInFull;
     }
 
     public void setPaidInFull(Boolean paidInFull) {
         this.paidInFull = paidInFull;
     }
-    public boolean isCancelled() {
-        return this.cancelled;
-    }
-    public boolean cancel() {
-        return this.game.cancelReservations(this.reservations);
-    }
-    public boolean isPaidInFull () {
-        return paidInFull;
-    }
-    public Boolean getPaidInFull() {
-        return this.paidInFull;
+
+    public double getTotalReserved() {
+        return this.totalReserved;
     }
 
-    public void setMadeReservations(Boolean madeReservations) {
-        this.madeReservations = madeReservations;
+    public void setTotalReserved(double totalReserved) {
+        this.totalReserved = totalReserved;
     }
 
-    public Boolean getMadeReservations() {
-        return this.madeReservations;
+    public double getTotalBill() {
+        return this.totalBill;
     }
 
-    public void setTotalBill(Float totalBill) {
+    public void setTotalBill(double totalBill) {
         this.totalBill = totalBill;
     }
 
-    public Float getTotalBill() {
-        return this.totalBill;
+    public double getAmountPaid() {
+        return this.amountPaid;
     }
-    public void readNotice(Notice notice) {
-        this.viewedNotices.add(notice);
+
+    public void setAmountPaid(double amountPaid) {
+        this.amountPaid = amountPaid;
     }
-    public Set<Notice> getNotices() {
-        return this.game.getNotices();
+
+    public VenueSection getVenueSection() {
+        return venueSection;
     }
-    public Set<Notice> getUnreadNotices() {
-        return this.getNotices()
-                    .stream()
-                    .filter(n -> !viewedNotices.contains(n))
-                    .collect(Collectors.toSet());
+
+    public void setVenueSection(VenueSection venueSection) {
+        this.venueSection = venueSection;
+    }
+
+    public double getBalance() {
+        return this.totalBill - this.amountPaid;
+    }
+
+    public boolean isPaidInFull() {
+        return getBalance() <= 0;
     }
 }

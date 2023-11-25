@@ -23,6 +23,7 @@ public class VenueSectionForm extends FormLayout {
     TextField description = new TextField("Description");
     NumberField capacity = new NumberField("Venue Capacity");
     TextField sectionMode = new TextField("Section Mode, i.e VIP");
+    NumberField seatPrice = new NumberField("Seat Price");
 
     Button save = new Button("Save");
     Button delete = new Button("Delete");
@@ -42,6 +43,7 @@ public class VenueSectionForm extends FormLayout {
                 description,
                 sectionMode,
                 capacity,
+                seatPrice,
                 createButtonLayout());
     }
 

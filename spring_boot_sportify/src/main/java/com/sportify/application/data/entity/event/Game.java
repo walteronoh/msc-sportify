@@ -1,9 +1,12 @@
 package com.sportify.application.data.entity.event;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.sportify.application.data.entity.AbstractEntity;
 import com.sportify.application.data.entity.venue.Venue;
+import com.sportify.application.data.entity.venue.VenueSection;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
@@ -84,5 +87,12 @@ public class Game extends AbstractEntity {
 
     public boolean getPlayed() {
         return this.played;
+    }
+
+    public List<VenueSection> getVenueSections() {
+        if (venue != null) {
+            return venue.getVenueSections();
+        }
+        return new ArrayList<VenueSection>();
     }
 }

@@ -19,8 +19,8 @@ public class VenueSection extends AbstractEntity {
     @NotNull
     @ManyToOne
     private Venue venue;
-
-    // private Float seatPrice = 0f;
+    
+    private Double seatPrice = 0.0;
 
     public String getName() {
         return name;
@@ -62,11 +62,11 @@ public class VenueSection extends AbstractEntity {
         return venue;
     }
 
-    // public void setSeatPrice(Float seatPrice) {
-    //     this.seatPrice = seatPrice;
-    // }
+    public void setSeatPrice(Double seatPrice) {
+        this.seatPrice = seatPrice;
+    }
 
-    // public Float getSeatPrice() {
-    //     return seatPrice;
-    // }
+    public Double getSeatPrice() {
+        return seatPrice;
+    }
 }

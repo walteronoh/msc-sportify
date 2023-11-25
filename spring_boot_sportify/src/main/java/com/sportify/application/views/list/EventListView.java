@@ -1,7 +1,10 @@
 package com.sportify.application.views.list;
 
+import java.util.List;
+
 import com.sportify.application.data.entity.event.Game;
 import com.sportify.application.data.entity.event.Sport;
+import com.sportify.application.data.entity.venue.VenueSection;
 import com.sportify.application.services.EventsService;
 import com.sportify.application.services.VenueService;
 import com.sportify.application.views.MainLayout;
@@ -10,6 +13,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
@@ -122,7 +126,7 @@ public class EventListView extends VerticalLayout {
 
             VerticalLayout gameLayout1 = new VerticalLayout();
 
-            gameLayout1.add(image, descriptionDiv, createEventStats(), actions);
+            gameLayout1.add(image, descriptionDiv, createEventStats(game), actions);
 
             // gameLayout.setAlignItems(Alignment.CENTER);
 
@@ -137,17 +141,26 @@ public class EventListView extends VerticalLayout {
         return gameLayout;
     }
 
-    private HorizontalLayout createEventStats() {
-        Span capacity = new Span("Capacity: 100");
+    private Details getPriceVariants(List<VenueSection> venueSections) {
+        VerticalLayout vl = new VerticalLayout();
+        venueSections.forEach(vs -> {
+            vl.add(new Span(vs.getSectionMode() + " : " + " Ksh " + vs.getSeatPrice()));
+        });
+
+        Details details = new Details("Price", vl);
+        details.setOpened(isAttached());
+        return details;
+    }
+
+    private HorizontalLayout createEventStats(Game game) {
+        Span capacity = new Span("Capacity: " + game.getVenue().getCapacity());
         capacity.getElement().getThemeList().add("badge contrast");
 
         Span remaining = new Span("Remaining: 20");
         remaining.getElement().getThemeList().add("badge");
 
-        Span price = new Span("Ksh 100");
-        price.getElement().getThemeList().add("badge success");
-
-        HorizontalLayout horizontalLayout = new HorizontalLayout(capacity, remaining, price);
+        HorizontalLayout horizontalLayout = new HorizontalLayout(capacity, remaining,
+                this.getPriceVariants(game.getVenueSections()));
         return horizontalLayout;
     }
 
