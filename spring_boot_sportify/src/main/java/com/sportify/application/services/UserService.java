@@ -63,4 +63,18 @@ public class UserService {
         promoterRepository.save(p);
     }
 
+    public List<BUser> findUser(String filterText) {
+        if(filterText == null || filterText.isEmpty()) {
+            return userRepository.findAll();
+        }
+        else {
+            // return userRepository.search(filterText);
+            return userRepository.findByNameContainingIgnoreCase(filterText);
+        }
+    }
+
+    public void deleteUser(BUser user) {
+        userRepository.delete(user);
+    }
+
 }

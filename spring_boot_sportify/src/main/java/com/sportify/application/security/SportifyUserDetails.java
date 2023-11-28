@@ -67,4 +67,8 @@ public class SportifyUserDetails implements UserDetails {
         return true;
     }
 
+    public GenericUser getUser() {
+        return user;
+    }
+
 }

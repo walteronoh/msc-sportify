@@ -1,14 +1,15 @@
 package com.sportify.application.services;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.sportify.application.data.entity.Company;
 import com.sportify.application.data.entity.Contact;
 import com.sportify.application.data.entity.Status;
 import com.sportify.application.data.repository.CompanyRepository;
 import com.sportify.application.data.repository.ContactRepository;
 import com.sportify.application.data.repository.StatusRepository;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class CrmService {
@@ -17,8 +18,8 @@ public class CrmService {
     private final StatusRepository statusRepository;
 
     public CrmService(ContactRepository contactRepository,
-                      CompanyRepository companyRepository,
-                      StatusRepository statusRepository) {
+                    CompanyRepository companyRepository,
+                    StatusRepository statusRepository) {
         this.contactRepository = contactRepository;
         this.companyRepository = companyRepository;
         this.statusRepository = statusRepository;

@@ -32,6 +32,7 @@ public class EventListView extends VerticalLayout {
     EventForm eventForm;
     EventsService eventsService;
     VenueService venueService;
+    Button participantBtn = new Button("View participants");
 
     public EventListView(EventsService eventsService, VenueService venueService) {
         this.eventsService = eventsService;
@@ -46,7 +47,12 @@ public class EventListView extends VerticalLayout {
 
         // Actions needed here
         // createEvent();
+        configureParticipants();
 
+    }
+
+    private void configureParticipants() {
+        participantBtn.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
     }
 
     private void configureEventForm() {
@@ -120,6 +126,11 @@ public class EventListView extends VerticalLayout {
             joinButton.addClickListener(event -> {
                 UI.getCurrent().navigate(ReservationListView.class, game.getId());
             });
+            // Button addParticipants = new Button("Add Participants");
+            // addParticipants.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+            // addParticipants.addClickListener(event -> {
+            //     UI.getCurrent().navigate(ParticipantListView.class, game.getId());
+            // })
 
             HorizontalLayout actions = new HorizontalLayout(joinButton);
 

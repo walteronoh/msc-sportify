@@ -1,7 +1,7 @@
 package com.sportify.application.views.list;
 
 import com.sportify.application.data.entity.booking.Booking;
-import com.sportify.application.data.entity.event.Game;
+// import com.sportify.application.data.entity.event.Game;
 import com.sportify.application.services.BookingService;
 import com.sportify.application.services.EventsService;
 import com.sportify.application.views.MainLayout;
@@ -32,7 +32,7 @@ public class ReservationListView extends VerticalLayout implements HasUrlParamet
 
     @Override
     public void setParameter(BeforeEvent event, @OptionalParameter Long game_id) {
-        if (game_id > 0) {
+        if (game_id >= 0) {
             // set Games
             bookingForm.setGame(eventsService.findGameById(game_id));
         } else {
@@ -57,7 +57,7 @@ public class ReservationListView extends VerticalLayout implements HasUrlParamet
     private void configureBookingForm() {
         Booking booking = new Booking();
         bookingForm.setBooking(booking);
-        bookingForm.setGame(eventsService.findGameById(Integer.toUnsignedLong(1301)));
+        // bookingForm.setGame(eventsService.findGameById(Integer.toUnsignedLong(1301)));
         bookingForm.setWidth("25em");
         bookingForm.addSaveListener(this::saveBooking);
         bookingForm.addCloseListener(this::closeBooking);

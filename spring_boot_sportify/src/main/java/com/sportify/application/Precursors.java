@@ -3,7 +3,6 @@ package com.sportify.application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 
 import com.sportify.application.data.entity.User.BUser;
 import com.sportify.application.data.entity.User.Promoter;
@@ -11,7 +10,6 @@ import com.sportify.application.data.repository.user.BUserRepository;
 import com.sportify.application.data.repository.user.PromoterRepository;
 import com.sportify.application.services.UserService;
 
-@Component
 public class Precursors {
     private BUserRepository bUserRepository;
     private PromoterRepository promoterRepository;

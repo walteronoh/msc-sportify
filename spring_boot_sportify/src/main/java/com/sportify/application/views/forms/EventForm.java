@@ -1,5 +1,7 @@
 package com.sportify.application.views.forms;
 
+import java.util.List;
+
 import com.sportify.application.data.entity.event.Game;
 import com.sportify.application.data.entity.event.Sport;
 import com.sportify.application.data.entity.venue.Venue;
@@ -21,8 +23,6 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.shared.Registration;
 
-import java.util.List;
-
 public class EventForm extends FormLayout {
     Binder<Game> binder = new BeanValidationBinder<>(Game.class);
     TextField title = new TextField("Event Title");
@@ -32,6 +32,8 @@ public class EventForm extends FormLayout {
     ComboBox<Venue> venue = new ComboBox<>("Venue");
     MultiFileMemoryBuffer buffer = new MultiFileMemoryBuffer();
     Upload upload = new Upload(buffer);
+
+
 
     Button save = new Button("Save");
     Button cancel = new Button("Cancel");

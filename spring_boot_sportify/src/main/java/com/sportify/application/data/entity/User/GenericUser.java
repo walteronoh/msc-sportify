@@ -22,6 +22,16 @@ public abstract class GenericUser {
     @Version
     private int version;
 
+    @NotNull
+    @Column(unique = true)
+    protected String name;
+    
+    @NotNull
+    protected String email;
+    @NotNull
+    @Column(name = "\"password\"")
+    protected String password;
+
     public Long getId() {
         return id;
     }
@@ -52,15 +62,6 @@ public abstract class GenericUser {
         }
         return super.equals(that);
     }
-   @NotNull
-   @Column(unique = true)
-   protected String name;
-   @NotNull
-   protected String email;
-   @NotNull
-   @Column(name = "\"password\"")
-   protected String password;
-
     public GenericUser() {}
     public GenericUser(String name_,
                     String email_,

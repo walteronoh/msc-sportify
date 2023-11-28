@@ -2,11 +2,14 @@ package com.sportify.application.data.entity.event;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 import com.sportify.application.data.entity.AbstractEntity;
 import com.sportify.application.data.entity.booking.Booking;
+import com.sportify.application.data.entity.participant.Participant;
 import com.sportify.application.data.entity.venue.Venue;
 import com.sportify.application.data.entity.venue.VenueSection;
 
@@ -35,6 +38,8 @@ public class Game extends AbstractEntity {
     private Venue venue;
     // @NotBlank
     private boolean played = false;
+    @OneToMany
+    private Set<Participant> participants = new HashSet<>();
 
     @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
     private List<Booking> bookings;
@@ -46,7 +51,12 @@ public class Game extends AbstractEntity {
     public String getTitle() {
         return this.title;
     }
-
+    public void setParticipants(Set<Participant> participants) {
+        this.participants = participants;
+    }
+    public Set<Participant> getParticipants() {
+        return participants;
+    }
     public void setDescription(String description) {
         this.description = description;
     }

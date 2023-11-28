@@ -8,6 +8,7 @@ import com.sportify.application.views.list.EventListView;
 import com.sportify.application.views.list.NotificationListView;
 import com.sportify.application.views.list.ParticipantListView;
 import com.sportify.application.views.list.SportsListView;
+import com.sportify.application.views.list.UserView;
 import com.sportify.application.views.list.VenueListView;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -47,8 +48,11 @@ public class MainLayout extends AppLayout {
         RouterLink routerLink6 = new RouterLink("Notifications", NotificationListView.class);
         routerLink6.setHighlightCondition(HighlightConditions.sameLocation());
 
+        RouterLink usersLink = new RouterLink("Users", UserView.class);
+        usersLink.setHighlightCondition(HighlightConditions.sameLocation());
+
         VerticalLayout verticalLayout = new VerticalLayout(routerLink1, routerLink2, routerLink3, routerLink4,
-                routerLink5, routerLink6);
+                routerLink5, routerLink6, usersLink);
 
         addToDrawer(verticalLayout);
     }

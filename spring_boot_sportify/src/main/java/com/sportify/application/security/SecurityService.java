@@ -1,6 +1,5 @@
 package com.sportify.application.security;
 
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.vaadin.flow.spring.security.AuthenticationContext;
@@ -13,9 +12,9 @@ public class SecurityService {
         this.authenticationContext = authenticationContext;
     }
 
-    public UserDetails getAuthenticatedUser() {
+    public SportifyUserDetails getAuthenticatedUser() {
         // return authenticationContext.getAuthenticatedUser(UserDetails.class).get();
-        return authenticationContext.getAuthenticatedUser(UserDetails.class).get();
+        return authenticationContext.getAuthenticatedUser(SportifyUserDetails.class).get();
     }
     public void logOut() {
         authenticationContext.logout();
