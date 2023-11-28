@@ -15,4 +15,6 @@ public interface VenueSectionRepository extends JpaRepository<VenueSection,Long>
     List<VenueSection> search(@Param("searchTerm") String searchTerm);
 
     List<VenueSection> findAllByVenue(Venue venue);
+
+    List<VenueSection> findByVenueAndNameContainingIgnoreCase(Venue venue, String filterText);
 }

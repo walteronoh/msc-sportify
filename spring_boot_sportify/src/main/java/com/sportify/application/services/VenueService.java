@@ -3,6 +3,7 @@ package com.sportify.application.services;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+
 import com.sportify.application.data.entity.venue.Venue;
 import com.sportify.application.data.entity.venue.VenueSection;
 import com.sportify.application.data.repository.venue.VenueRepository;
@@ -63,11 +64,12 @@ public class VenueService {
         return venueSectionRepository.findAll();
     }
 
-    public List<VenueSection> findVenueSection(String filterText) {
+    public List<VenueSection> findVenueSection(Venue venue, String filterText) {
         if (filterText == null || filterText.isEmpty()) {
-            return venueSectionRepository.findAll();
+            return venueSectionRepository.findAllByVenue(venue);
         } else {
-            return venueSectionRepository.search(filterText);
+            // return venueSectionRepository.search(venue, filterText);
+            return venueSectionRepository.findByVenueAndNameContainingIgnoreCase(venue, filterText);
         }
     }
 

@@ -15,6 +15,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+
 import jakarta.annotation.security.PermitAll;
 
 @PageTitle("Venue | Sportify")
@@ -134,9 +135,11 @@ public class VenueListView extends VerticalLayout {
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
         grid.asSingleSelect().addValueChangeListener(e -> {
-            editVenue(e.getValue());
+            Venue v = e.getValue();
+            editVenue(v);
             viewSections.addClickListener(
-                    event -> UI.getCurrent().navigate(VenueSectionListView.class, e.getValue().getId()));
+                    // event -> UI.getCurrent().navigate(VenueSectionListView.class, e.getValue().getId()));
+                    event -> UI.getCurrent().navigate(VenueSectionListView.class, v.getId()));
             viewSections.setVisible(true);
         });
     }

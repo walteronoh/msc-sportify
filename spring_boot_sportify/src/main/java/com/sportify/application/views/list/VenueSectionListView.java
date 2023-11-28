@@ -18,6 +18,7 @@ import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+
 import jakarta.annotation.security.PermitAll;
 
 @PageTitle("Venue Section | Sportify")
@@ -37,8 +38,8 @@ public class VenueSectionListView extends VerticalLayout implements HasUrlParame
     public void setParameter(BeforeEvent event, Long parameter) {
         if (parameter > 0) {
             this.venue = venueService.findvenueById(parameter);
-            form.setVenue(this.venue); 
-            List<VenueSection> venueSections = venueService.findVenueSections(venueService.findvenueById(parameter));
+            form.setVenue(this.venue);
+            List<VenueSection> venueSections = venueService.findVenueSections(this.venue);
             grid.setItems(venueSections);
         }
     }
@@ -67,7 +68,7 @@ public class VenueSectionListView extends VerticalLayout implements HasUrlParame
     }
 
     private void updateList() {
-        grid.setItems(venueService.findVenueSection(filterText.getValue()));
+        grid.setItems(venueService.findVenueSection(venue, filterText.getValue()));
     }
 
     private Component getContent() {
@@ -131,7 +132,7 @@ public class VenueSectionListView extends VerticalLayout implements HasUrlParame
         setSizeFull();
         grid.setColumns("name", "description");
         grid.addColumn(v -> v.getSectionMode()).setHeader("Section Mode");
-        grid.addColumn(v -> v.getCapacity()).setHeader("Capacity");        
+        grid.addColumn(v -> v.getCapacity()).setHeader("Capacity");
         grid.addColumn(v -> v.getSeatPrice()).setHeader("Seat Price");
 
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
