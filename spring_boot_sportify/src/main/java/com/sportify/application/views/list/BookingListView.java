@@ -1,12 +1,10 @@
 package com.sportify.application.views.list;
 
-import com.sportify.application.data.entity.Contact;
 import com.sportify.application.data.entity.booking.Booking;
 import com.sportify.application.data.entity.payment.Payment;
 import com.sportify.application.services.BookingService;
 import com.sportify.application.services.payment.PaymentService;
 import com.sportify.application.views.MainLayout;
-import com.sportify.application.views.forms.BookingForm;
 import com.sportify.application.views.forms.PaymentForm;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;

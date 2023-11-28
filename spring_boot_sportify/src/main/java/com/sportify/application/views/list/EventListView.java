@@ -14,13 +14,16 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.theme.lumo.LumoUtility;
 
 import jakarta.annotation.security.PermitAll;
 
@@ -117,9 +120,25 @@ public class EventListView extends VerticalLayout {
             image.setMaxWidth("100%");
             image.setMaxHeight("100%");
 
+            // Div descriptionDiv = new Div();
+            // descriptionDiv.setText("Description " + game.getDescription() + "\nDate " + game.getGameDate() + "\nSport "
+            //         + game.getSport().getName());
+            Div titleDiv = new Div();
+            titleDiv.add(new H4(game.getTitle()));
+
+            Div sportDiv = new Div();
+            sportDiv.add(new H4("Sport: " + game.getSport().getName()));
+            HorizontalLayout titleSportLayout = new HorizontalLayout(titleDiv, sportDiv);
+
             Div descriptionDiv = new Div();
-            descriptionDiv.setText("Description" + game.getDescription() + "Date" + game.getGameDate() + "Sport "
-                    + game.getSport().getName());
+            Paragraph desc = new Paragraph(game.getDescription());
+            desc.addClassName(LumoUtility.FontWeight.BOLD);
+            desc.addClassName(LumoUtility.TextColor.SECONDARY);
+            descriptionDiv.add(desc);
+
+            VerticalLayout descriptionLayout = new VerticalLayout();
+            descriptionLayout.add(titleSportLayout);
+            descriptionLayout.add(descriptionDiv);
 
             Button joinButton = new Button("Attend");
             joinButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
@@ -136,7 +155,7 @@ public class EventListView extends VerticalLayout {
 
             VerticalLayout gameLayout1 = new VerticalLayout();
 
-            gameLayout1.add(image, descriptionDiv, createEventStats(game), actions);
+            gameLayout1.add(image, descriptionLayout, createEventStats(game), actions);
 
             // gameLayout.setAlignItems(Alignment.CENTER);
 
